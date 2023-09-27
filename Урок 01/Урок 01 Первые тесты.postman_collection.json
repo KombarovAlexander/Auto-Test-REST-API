@@ -1,0 +1,534 @@
+{
+	"info": {
+		"_postman_id": "50f9382e-e354-40ba-9693-20d92df526b4",
+		"name": "Урок 01 Первые тесты",
+		"description": "## **Коллекция ДЗ Урок 1. Первые тесты**\n\n#### Задание 1.\n\nНаписать автотесты на блок статусов ответов ресурса **USERS**, метод _**MagicSearch**_.\n\nТестируемые статус-коды: _**230**_, _**231**_, _**232**_, _**233**_, _**234**_, _**235**_, _**455**_, _**456**_, _**457**_, _**458**_ и _**459**_\n\n##### _Описание запросов коллекции_:\n\nЗапросы коллекции построены по единому шаблону и проверяют статус ответа сервера на соответствие ожидаемому результату, в зависимости от передаваемых в теле запроса данных.\n\n- **GET Код <тестируемый код> Users magicSearch** - в теле запроса передаются данные, приводящие к соответствующему статусу ответа сервера; автотесты проверяют возвращенный сервером статус с ожидаемым результатом согласно требованиям.\n    \n\n##### Примечание:\n\n1. Коллекция требует предварительного запуска коллекции **Подготовка данных для запросов к ресурсу USERS**. Если указанная коллекция уже была однократно запущена ранее, повторного ее запуска непосредствено перед запуском данной коллекции не требуется.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23386398",
+		"_collection_link": "https://lively-capsule-55441.postman.co/workspace/%25D0%2590%25D0%25B2%25D1%2582%25D0%25BE%25D0%25BC%25D0%25B0%25D1%2582%25D0%25B8%25D0%25B7%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D1%2582%25D0%25B5%25D1%2581%25D1%2582%25D0%25BE%25D0%25B2-%25D0%25B4%25D0%25BB%25D1%258F-REST-A~f0af8592-a4dc-4fe3-aed5-135832153c62/collection/23386398-50f9382e-e354-40ba-9693-20d92df526b4?action=share&source=collection_link&creator=23386398"
+	},
+	"item": [
+		{
+			"name": "ДЗ",
+			"item": [
+				{
+					"name": "Код 230 Users magicSearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"По запросу ничего не найдено [Статус-код 230]\", function () {\r",
+									"    pm.response.to.have.status(230);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"По запросу ничего не найдено \", function () {\r",
+									"    pm.response.to.have.status(5000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":\"Емельян Пугачев\",\r\n\"fullSimilarity\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Код 231 Users magicSearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"По запросу найден 1 пользователь [Статус-код 231]\", function () {\r",
+									"    pm.response.to.have.status(231);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"По запросу найден 1 пользователь [Статус-код 231]\", function () {\r",
+									"    pm.response.to.have.status(5000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":\"Фёдоров\",\r\n\"fullSimilarity\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Код 232 Users magicSearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"По запросу найдено больше 1 пользователя, но без компаний [Статус-код 232]\", function () {\r",
+									"    pm.response.to.have.status(232);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"По запросу найдено больше 1 пользователя, но без компаний[Статус-код 232]\", function () {\r",
+									"    pm.response.to.have.status(5000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":\"Сидоров\",\r\n\"fullSimilarity\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Код 233 Users magicSearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"По запросу найдена 1 компания [Статус-код 233]\", function () {\r",
+									"    pm.response.to.have.status(233);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"По запросу найдена 1 компания [Статус-код 233]\", function () {\r",
+									"    pm.response.to.have.status(5000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":\"Цирк и кони\",\r\n\"fullSimilarity\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Код 234 Users magicSearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"По запросу найдено больше 1 компании [Статус-код 234]\", function () {\r",
+									"    pm.response.to.have.status(234);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"По запросу найдено больше 1 компании [Статус-код 234]\", function () {\r",
+									"    pm.response.to.have.status(5000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":\"Цирк\",\r\n\"fullSimilarity\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Код 235 Users magicSearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"По запросу найдены как пользователи, так и компании [Статус-код 235]\", function () {\r",
+									"    pm.response.to.have.status(235);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"По запросу найдены как пользователи, так и компании [Статус-код 235]\", function () {\r",
+									"    pm.response.to.have.status(5000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":\"Фёдоров Цирк\",\r\n\"fullSimilarity\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Код 455 Users magicSearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Не указан обязательный параметр query в запросе [Статус-код 455]\", function () {\r",
+									"    pm.response.to.have.status(455);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Не указан обязательный параметр query в запросе [Статус-код 455]\", function () {\r",
+									"    pm.response.to.have.status(5000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"fullSimilarity\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Код 456 Users magicSearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Длина запроса превышает 1000 символов [Статус-код 456]\", function () {\r",
+									"    pm.response.to.have.status(456);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Длина запроса превышает 1000 символов [Статус-код 456]\", function () {\r",
+									"    pm.response.to.have.status(5000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":\"Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк  Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров Цирк Фёдоров\",\r\n\"fullSimilarity\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Код 457 Users magicSearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Значение параметра partyType не из доступного списка выбора [Статус-код 457]\", function () {\r",
+									"    pm.response.to.have.status(457);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Значение параметра partyType не из доступного списка выбора [Статус-код 457]\", function () {\r",
+									"    pm.response.to.have.status(5000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":\"Фёдоров Цирк\",\r\n\"fullSimilarity\":false,\r\n\"partyType\":\"SUPER_USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Код 458 Users magicSearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Значение параметра taskStatus не из доступного списка выбора [Статус-код 458]\", function () {\r",
+									"    pm.response.to.have.status(458);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Значение параметра taskStatus не из доступного списка выбора [Статус-код 458]\", function () {\r",
+									"    pm.response.to.have.status(5000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":\"Фёдоров Цирк\",\r\n\"fullSimilarity\":false,\r\n\"taskStatus\":\"SUPER_ALL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Код 459 Users magicSearch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Значение параметра include не из доступного списка выбора [Статус-код 459]\", function () {\r",
+									"    pm.response.to.have.status(459);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Значение параметра include не из доступного списка выбора [Статус-код 459]\", function () {\r",
+									"    pm.response.to.have.status(5000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":\"Фёдоров Цирк\",\r\n\"fullSimilarity\":false,\r\n\"include\":\"SUPER_ALL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

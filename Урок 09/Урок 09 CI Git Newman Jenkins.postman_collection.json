@@ -1,0 +1,48 @@
+{
+	"info": {
+		"_postman_id": "a6cdea06-5e3e-4639-808c-493d6fc4a84f",
+		"name": "Урок 09 CI Git Newman Jenkins",
+		"description": "## **Коллекция ДЗ Урок 9.** CI Git Newman Jenkins\n\n#### Задание 41.\n\nУстановить **Newman**. Вывести в консоль версии _**Node.js**_, _**npm**_ и _**Newman**_.\n\n##### Результат выполнения:\n\n<img src=\"https://content.pstmn.io/7e334434-8786-4eaf-8612-ab616d875b29/0JfQsNC00LDQvdC40LUgNDEuanBn\">\n\n#### Задание 42.\n\nПроверка передачи данных по цепочке между запросами. С помощью **Newman** запустить запросы из _**ДЗ 26 Урока 6 \"Переменные и окружения\"**_.\n\n##### Результат выполнения:\n\n<img src=\"https://content.pstmn.io/28c47479-521d-4eab-beec-4b24f149f353/0JfQsNC00LDQvdC40LUgNDIuanBn\">\n\n#### Задание 43.\n\nПроверка получения входных данных из файла. С помощью **Newman** запустить запросы из _**ДЗ 28 Урока 6 \"Переменные и окружения\"**_.\n\n##### Результат выполнения:\n\n<img src=\"https://content.pstmn.io/336946ad-0942-455a-b08d-df290eaebe87/0JfQsNC00LDQvdC40LUgNDNfMS5qcGc=\">\n\n<img src=\"https://content.pstmn.io/6235f197-d56c-48ad-96e3-669cebf3a44f/0JfQsNC00LDQvdC40LUgNDNfMi5qcGc=\">\n\n#### Задание 44.\n\nОтчеты в **Newman**. С помощью **Newman** запустить запустить любую коллекцию с падениями автотестов. Создать для нее отчет _**htmlextra**_ с темной темой, который показывает только падения автотестов.\n\n##### Результат выполнения::\n\n<img src=\"https://content.pstmn.io/74f889e4-840d-4c8e-aec0-6fc814463c68/0JfQsNC00LDQvdC40LUgNDRfMS5qcGc=\">\n\n<img src=\"https://content.pstmn.io/e526e2f1-d476-40e7-b702-e0644ff0a0d2/0JfQsNC00LDQvdC40LUgNDRfMi5qcGc=\">\n\n#### Задание 45.\n\nДля запросов из _**ДЗ 26 Урока 6 \"Переменные и окружения\"**_ создать и запустить задачу в **Jenkins**. Коллекцию для задачи требуется получить по _**URL**_.\n\n##### Результат выполнения:\n\n<img src=\"https://content.pstmn.io/df97cb70-17aa-4c80-95c7-9452dc502175/0JfQsNC00LDQvdC40LUgNDVfMi5qcGc=\">\n\n<img src=\"https://content.pstmn.io/455ee931-3d65-464f-ba0f-71e94893276d/0JfQsNC00LDQvdC40LUgNDVfMS5qcGc=\">\n\n#### Задание 46.\n\nЗапустить созданную ранее в **Задании 45** задачу _**Jenkins**_ **удаленно**, используя **cURL**.\n\n##### Результат выполнения:\n\n<img src=\"https://content.pstmn.io/5be5d4ff-17f8-493a-bfcf-ca4976684a88/0JfQsNC00LDQvdC40LUgNDZfMS5qcGc=\">\n\n<img src=\"https://content.pstmn.io/535941ba-62f5-493d-8bf9-efbc8e2db9c2/0JfQsNC00LDQvdC40LUgNDZfMi5qcGc=\">\n\n#### Примечание:\n\nДополнительно, вне рамок курса, были выполнены следующие задания:\n\n- Локальная установка _**Jenkins**_\n    \n- Установка в **Jenkins** плагина _**Allure Report**_\n    \n- Создание в **Jenkins** _**Pipeline**_, запускающий хранящуюся на _**Github**_ коллекцию _**Postman**_ и формирующий по результатам выполнения отчет _**Allure Report**_.\n    \n\n##### Результат выполнения:\n\n<img src=\"https://content.pstmn.io/72398343-82ed-43f2-ba83-5bbf8ca27d1c/MTIzLnBuZw==\" alt=\"\">\n\n  \n\n<img src=\"https://content.pstmn.io/cb402d39-3539-47d4-85e9-3bfa08962bfd/NDU2LnBuZw==\" alt=\"\">",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23386398",
+		"_collection_link": "https://lively-capsule-55441.postman.co/workspace/%25D0%2590%25D0%25B2%25D1%2582%25D0%25BE%25D0%25BC%25D0%25B0%25D1%2582%25D0%25B8%25D0%25B7%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D1%2582%25D0%25B5%25D1%2581%25D1%2582%25D0%25BE%25D0%25B2-%25D0%25B4%25D0%25BB%25D1%258F-REST-A~f0af8592-a4dc-4fe3-aed5-135832153c62/collection/23386398-a6cdea06-5e3e-4639-808c-493d6fc4a84f?action=share&source=collection_link&creator=23386398"
+	},
+	"item": [],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "idTask",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "emailOwner",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "arrItemsShop",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

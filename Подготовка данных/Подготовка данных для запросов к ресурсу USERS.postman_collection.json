@@ -1,0 +1,491 @@
+{
+	"info": {
+		"_postman_id": "8db2d507-1f30-4222-9d4c-a3ed33f943dc",
+		"name": "Подготовка данных для запросов к ресурсу USERS",
+		"description": "## **Коллекция подготовки тестовых данных для ресурса USERS**\n\nПоскольку БД ресурса _**USERS**_ ежедневно чистится, перед выполнением запросов и тестов данного _**workspace**_, обращающихся к ресурсу _**USERS**_, необходимо **однократно** выполнить данную коллекцию.\n\n##### _Описание запросов коллекции_:\n\n- **POST doRegister** - создает пользователей-владельцев компаний\n- **POST createCompany** - создает компании, указывая в качестве владельцев пользователей, созданных в предыдущем запросе\n- **POST createUserWithTasks** - для созданных в предыдущем запросе компаний создает сотрудников и делегированные им задачи\n    \n\n##### Примечание:\n\n1. Коллекция использует переменные, необходимые для передачи данных между запросами коллекции. Данные переменные не требуют предварительного заполнения.\n    \n2. Код запросов коллекции содержит подробные и исчерпывающие комментарии.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23386398",
+		"_collection_link": "https://lively-capsule-55441.postman.co/workspace/%25D0%2590%25D0%25B2%25D1%2582%25D0%25BE%25D0%25BC%25D0%25B0%25D1%2582%25D0%25B8%25D0%25B7%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D1%2582%25D0%25B5%25D1%2581%25D1%2582%25D0%25BE%25D0%25B2-%25D0%25B4%25D0%25BB%25D1%258F-REST-A~f0af8592-a4dc-4fe3-aed5-135832153c62/collection/23386398-8db2d507-1f30-4222-9d4c-a3ed33f943dc?action=share&source=collection_link&creator=23386398"
+	},
+	"item": [
+		{
+			"name": "doRegister",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let doRegisterBody = !pm.collectionVariables.get(\"doRegisterBody\") ? [] : JSON.parse(pm.collectionVariables.get(\"doRegisterBody\")); \r",
+							"// Пытаемся считать переменную окружения doRegisterBody, в ней массив для Body запросов, регистрирующих владельцев компаний\r",
+							"// Если в переменной null, пишем в нее пустой массив, если не null - парсим ее значение JSON.parse()\r",
+							"\r",
+							"if(doRegisterBody == 0) { // Если массив в doRegisterBody для Body запросов пустой, то заполняем его\r",
+							"    doRegisterBody = [{\r",
+							"                \"email\": \"fedorov@mail.ru\",\r",
+							"                \"name\": \"Фёдор Фёдоров\",\r",
+							"                \"password\": \"53\"\r",
+							"                },\r",
+							"                {\r",
+							"                \"email\": \"sidorov@gmail.com\",\r",
+							"                \"name\": \"Сидор Сидоров\",\r",
+							"                \"password\": \"45\"\r",
+							"                },\r",
+							"                {\r",
+							"                \"email\": \"fsidorovf@gmail.com\",\r",
+							"                \"name\": \"Фёдор Сидоров\",\r",
+							"                \"password\": \"11\"\r",
+							"                }\r",
+							"            ];\r",
+							"}\r",
+							"\r",
+							"let curBody = doRegisterBody.shift(); // Удаляем из массива doRegisterBody 1-й элемент и записываем его в curBody\r",
+							"pm.collectionVariables.set(\"curBody\", JSON.stringify(curBody)); // записываем curBody в переменную окружения curBody\r",
+							"pm.collectionVariables.set(\"doRegisterBody\", JSON.stringify(doRegisterBody)); // записываем уменьшенный на первый элемент массив doRegisterBody а переменную окружения doRegisterBody\r",
+							"// Все массивы и объекты, которые мы загоняем в переменные окружения, надо предварительно перекидывать в строку JSON.stringify() !!!\r",
+							"\r",
+							"console.log(curBody);\r",
+							"console.log(doRegisterBody);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const doRegisterBody = JSON.parse(pm.collectionVariables.get(\"doRegisterBody\"));\r",
+							"// все, что мы тянем из переменных окружения, надо парсить !!! JSON.parse(), т.к. переменные окружения все хранят в строке\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData);\r",
+							"let emailList = !pm.collectionVariables.get(\"emailList\") ? [] : JSON.parse(pm.collectionVariables.get(\"emailList\"));\r",
+							"emailList.push(jsonData.email);\r",
+							"pm.collectionVariables.set(\"emailList\", JSON.stringify(emailList));\r",
+							"\r",
+							"if (doRegisterBody && doRegisterBody.length > 0){\r",
+							"    postman.setNextRequest(\"doRegister\");\r",
+							"} else {\r",
+							"    postman.setNextRequest(\"CreateCompany\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{curBody}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{USERS_URL}}/doregister",
+					"host": [
+						"{{USERS_URL}}"
+					],
+					"path": [
+						"doregister"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "1. Зарегистрировали пользователя-владельца компнии НКВД",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"beria@nkvd.com\",\r\n    \"name\": \"Берия\",\r\n    \"password\": \"53\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/doregister",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"doregister"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "createCompany",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let compBodys = !pm.collectionVariables.get(\"compBodys\") ? [] : JSON.parse(pm.collectionVariables.get(\"compBodys\")); \r",
+							"// Пытаемся считать переменную окружения compBodys, в ней массив для Body запросов, создающих компании\r",
+							"// Если в переменной null, пишем в нее пустой массив, если не null - парсим ее значение JSON.parse()\r",
+							"let emailList = !pm.collectionVariables.get(\"emailList\") ? [] : JSON.parse(pm.collectionVariables.get(\"emailList\")); \r",
+							"let compUsers = [];\r",
+							"\r",
+							"if(compBodys == 0) { // Если массив в compBodys для Body запросов пустой, то заполняем его\r",
+							"    compBodys = [{\r",
+							"                \"company_name\": \"Цирк и клоуны\",\r",
+							"                \"company_type\": \"ОАО\"\r",
+							"                },\r",
+							"                {\r",
+							"                \"company_name\": \"Цирк и кони\",\r",
+							"                \"company_type\": \"ООО\"\r",
+							"                }\r",
+							"            ];\r",
+							"}\r",
+							"\r",
+							"let curCompBody = compBodys.shift(); // Удаляем из массива compBodys 1-й элемент и записываем его в curCompBody\r",
+							"let curEmail = emailList.shift(); // Удаляем из массива emailList 1-й элемент и записываем его в curEmail\r",
+							"compUsers.push(curEmail); // массив для ключа \"company_users\", загоняем в него 1-й e-mail, полученный в ответе doRegister\r",
+							"curCompBody.company_users = compUsers; // добавляем в тело запроса \"company_users\": [\"ivanov@mail.com\"]\r",
+							"curCompBody.email_owner = curEmail; // добавляем в тело запроса \"email_owner\": \"ivanov@mail.com\"\r",
+							"\r",
+							"pm.collectionVariables.set(\"curCompBody\", JSON.stringify(curCompBody)); // записываем curCompBody в переменную окружения curCompBody\r",
+							"pm.collectionVariables.set(\"compBodys\", JSON.stringify(compBodys)); // записываем уменьшенный на первый элемент массив compBodys в переменную окружения compBodys\r",
+							"// Все массивы и объекты, которые мы загоняем в переменные окружения, надо предварительно перекидывать в строку JSON.stringify() !!!\r",
+							"pm.collectionVariables.set(\"emailList\", JSON.stringify(emailList)); // записываем уменьшенный на первый элемент массив emailList в переменную окружения emailList\r",
+							"\r",
+							"console.log(curCompBody);\r",
+							"console.log(compBodys);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const compBodys = JSON.parse(pm.collectionVariables.get(\"compBodys\"));\r",
+							"// все, что мы тянем из переменных окружения, надо парсить !!! JSON.parse(), т.к. переменные окружения все хранятся в строке\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData);\r",
+							"let idCompList = !pm.collectionVariables.get(\"idCompList\") ? [] : JSON.parse(pm.collectionVariables.get(\"idCompList\"));\r",
+							"// Читаем из переменной окружения idCompList список компаний: если он null - то пустой массив, если нет - парсим\r",
+							"idCompList.push(jsonData.id_company); // добавляем в idCompList id комании, полученной в ответе\r",
+							"pm.collectionVariables.set(\"idCompList\", JSON.stringify(idCompList)); // Записываем idCompList в переменную окружения idCompList\r",
+							"\r",
+							"if (compBodys && compBodys.length > 0){\r",
+							"    postman.setNextRequest(\"CreateCompany\");\r",
+							"} else {\r",
+							"    postman.setNextRequest(\"CreateUserWithTasks\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{curCompBody}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{USERS_URL}}/createcompany",
+					"host": [
+						"{{USERS_URL}}"
+					],
+					"path": [
+						"createcompany"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "2. Создали компанию НКВД с одним сотрудником - он же ее владелец",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"company_name\": \"НКВД\",\r\n  \"company_type\": \"ОАО\",\r\n  \"company_users\": [\"beria@nkvd.com\"],\r\n  \"email_owner\": \"beria@nkvd.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/createcompany",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"createcompany"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "2а. Создали компанию с именем похожим на НКВД",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"company_name\": \"НКВД МГБ\",\r\n  \"company_type\": \"ОАО\",\r\n  \"company_users\": [\"beria@nkvd.com\"],\r\n  \"email_owner\": \"beria@nkvd.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/createcompany",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"createcompany"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "createUserWithTasks",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let userBodys = !pm.collectionVariables.get(\"userBodys\") ? [] : JSON.parse(pm.collectionVariables.get(\"userBodys\")); \r",
+							"// Пытаемся считать переменную окружения userBodys, в ней массив для Body запросов, создающих работников компаний\r",
+							"// Если в переменной null, пишем в нее пустой массив, если не null - парсим ее значение JSON.parse()\r",
+							"\r",
+							"let idCompList = !pm.collectionVariables.get(\"idCompList\") ? [] : JSON.parse(pm.collectionVariables.get(\"idCompList\")); \r",
+							"// Пытаемся считать из переменной окружения idCompList список id созданных ранее компаний\r",
+							"\r",
+							"let companies = []; // Массив для списка компаний работника\r",
+							"\r",
+							"if(userBodys == 0) { // Если массив в userBodys для Body запросов пустой, то заполняем его\r",
+							"    userBodys = [{\r",
+							"                    \"email\": \"alexandrov@gmail.com\",\r",
+							"                    \"name\": \"Александр Александров\",\r",
+							"                    \"tasks\": [{\r",
+							"                                \"title\": \"Задача №1\",\r",
+							"                                \"description\": \"Выполнить задачу №1\"\r",
+							"                              },\r",
+							"                              {\r",
+							"                                \"title\": \"Задача №2\",\r",
+							"                                \"description\": \"Выполнить задачу №2\"\r",
+							"                              }]\r",
+							"                 },\r",
+							"                 {\r",
+							"                    \"email\": \"stepanov@mail.com\",\r",
+							"                    \"name\": \"Степан Степанов\",\r",
+							"                    \"tasks\": [{\r",
+							"                                \"title\": \"Задача №3\",\r",
+							"                                \"description\": \"Выполнить задачу №3\"\r",
+							"                              },\r",
+							"                              {\r",
+							"                                \"title\": \"Задача №4\",\r",
+							"                                \"description\": \"Выполнить задачу №4\"\r",
+							"                              }]\r",
+							"                }];\r",
+							"}\r",
+							"\r",
+							"let curUserBody = userBodys.shift(); // Удаляем из массива userBodys 1-й элемент и записываем его в curUserBody\r",
+							"let curCompany = idCompList.shift(); // Удаляем из массива idCompList 1-й элемент и записываем его в curCompany\r",
+							"companies.push(curCompany); // массив для ключа \"companies\", загоняем в него 1-й id компании, полученный в ответе CreateCompany\r",
+							"curUserBody.companies = companies; // добавляем в тело запроса \"companies\": [116]\r",
+							"\r",
+							"pm.collectionVariables.set(\"curUserBody\", JSON.stringify(curUserBody)); // записываем curUserBody в переменную окружения curUserBody\r",
+							"pm.collectionVariables.set(\"userBodys\", JSON.stringify(userBodys)); // записываем уменьшенный на первый элемент массив userBodys в переменную окружения userBodys\r",
+							"// Все массивы и объекты, которые мы загоняем в переменные окружения, надо предварительно перекидывать в строку JSON.stringify() !!!\r",
+							"pm.collectionVariables.set(\"idCompList\", JSON.stringify(idCompList)); // записываем уменьшенный на первый элемент массив idCompList в переменную окружения idCompList\r",
+							"\r",
+							"console.log(curUserBody);\r",
+							"console.log(userBodys);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const userBodys = JSON.parse(pm.collectionVariables.get(\"userBodys\"));\r",
+							"// все, что мы тянем из переменных окружения, надо парсить !!! JSON.parse(), т.к. переменные окружения все хранятся в строке\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"if (userBodys && userBodys.length > 0){\r",
+							"    postman.setNextRequest(\"CreateUserWithTasks\");\r",
+							"} else {\r",
+							"    postman.setNextRequest(null);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{curUserBody}}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{USERS_URL}}/createuserwithtasks",
+					"host": [
+						"{{USERS_URL}}"
+					],
+					"path": [
+						"createuserwithtasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "3. Создали для компнии НКВД сотрудника вместе с двумя задачами",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\": \"mekhlis@nkvd.com\",\r\n \"name\": \"Мехлис\",\r\n \"tasks\": [{\r\n   \"title\": \"Воронок №1\",\r\n   \"description\": \"Отправить воронок за Зеленским\"\r\n  },\r\n  {\r\n   \"title\": \"Шлеп №1\",\r\n   \"description\": \"Пустить в шлеп Залужного\"\r\n  }\r\n ],\r\n \"companies\": [54]\r\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://users.bugred.ru/tasks/rest/createuserwithtasks",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								"tasks",
+								"rest",
+								"createuserwithtasks"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "doRegisterBody",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "curBody",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "emailList",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "compBodys",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "curCompBody",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "idCompList",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userBodys",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "curUserBody",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

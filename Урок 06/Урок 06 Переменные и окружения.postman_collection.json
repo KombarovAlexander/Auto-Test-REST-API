@@ -1,0 +1,768 @@
+{
+	"info": {
+		"_postman_id": "4725f4be-2303-4c16-8ce9-4ea9912c9a93",
+		"name": "Урок 06 Переменные и окружения",
+		"description": "## **Коллекция ДЗ Урок 6.** Переменные и окружения\n\n#### Задание 24.\n\n**DADATA**, поиск по фамилии. В запросе к ресурсу DADATA параметризируйте авторизацию.\n\n##### Запрос задания:\n\n- **Папка ДЗ 24 DADATA Параметризация авторизации**\n    \n\n#### Задание 25.\n\n**SHOP**, метод _**create**_. Создайте товар с рандомной ценой.\n\n##### Запрос задания:\n\n- **POST ДЗ 25 SHOP create Создать товар с рандомной ценой**\n    \n\n#### Задание 26.\n\n**USERS**, методы _**doRegister**_ и _**getUser**_. Методом _**doRegister**_ на ресурсе **USER** создать пользователя с рандомными _**email**_, _**name**_ и _**password**_. Для созданного пользователя вызвать метод _**getUser**_.\n\n##### Запросы задания:\n\n- **POST ДЗ 26-1 USER doRegister Создать пользователя**\n- **POST ДЗ 26-2 USER getUser Получить информацию о пользователе**\n    \n\n#### Задание 27.\n\n**USERS**, метод _**updateUserOneField**_. Методом _**doRegister**_ создать пользователя с рандомными _**name**_ и _**email**_. Методом _**updateUserOneField**_ обновить у этого пользователя поле _**hobby**_. Написать автотест, проверяющий, что это поле обновилось именно тем значением, которое было указано.\n\n##### Запросы задания:\n\n- **POST ДЗ 27 USER updateUserOneField Изменить указанное поле пользователя**\n    \n\n##### Примечание:\n\nПоскольку пользователь с рандомными _**email**_, _**name**_ и _**password**_ уже был создан в цепочке запросов из **ДЗ 26** и его _**email**_ был сохранен в переменной коллекции _**userEmail**_, для выполнения этого задания был использован именно этот, созданный ранее, пользователь. Поэтому, для успешного выполнения запроса этого ДЗ, необходимо предварительное выполнение запросов из **ДЗ 26**.\n\n#### Задание 28.\n\n**USERS**, метод _**magicSearch**_. Написать автотесты, проверяющие статус-коды _**230-235**_ на значения, а также на количество элементов в ответе сервера. Запрос необходимо запустить в _**раннере Postman**_, в качестве входных данных использовать файл формата **JSON** или **CSV**.\n\n##### Запросы задания:\n\n- **GET ДЗ 28 USER magicSearch Входные данные из файла**\n    \n\n##### Примечание:\n\nВ качестве входных данных подавался файл формата **JSON** следующего содержания:\n\n``` json\n[{\n  \"query\": \"Емельян Пугачев\",\n  \"fullSimilarity\": false,\n  \"count\": 0,\n  \"code\": 230\n}, {\n  \"query\": \"Фёдоров\",\n  \"fullSimilarity\": false,\n  \"count\": 1,\n  \"code\": 231\n},{\n  \"query\": \"Сидоров\",\n  \"fullSimilarity\": false,\n  \"count\": 2,\n  \"code\": 232\n},{\n  \"query\": \"Цирк и клоуны\",\n  \"fullSimilarity\": true,\n  \"count\": 1,\n  \"code\": 233\n},{\n  \"query\": \"Цирк\",\n  \"fullSimilarity\": false,\n  \"count\": 2,\n  \"code\": 234\n},{\n  \"query\": \"Цирк Сидоров\",\n  \"fullSimilarity\": false,\n  \"count\": 2,\n  \"code\": 235\n}]\n\n ```\n\nДля выполнения этого задания требуется предварительный запуск коллекции **Подготовка данных для запросов к ресурсу USERS**.\n\n#### Задание 28-1.\n\n**JIRA**, методы _**createIssue**_ и _**getIssue**_. Методом _**createIssue**_ создайте задачу на ресурсе **JIRA**. Для созданной задачи вызовите метод _**getIssue**_ и убедитесь, что поля _**key**_, _**id**_, _**summary**_ и _**text**_ в ответе сервера заполнены теми же значениями, что указывались и при создании задачи.\n\n##### Примечание:\n\nДля выполнения запроса с методом _**createIssue**_ необходимо заполнить переменные коллекции _**jiraPrjKey**_, _**jiraIssuetypeId**_, _**jiraSummary**_ и _**jiraDescription**_ своими (произвольными) значениями.\n\n**ID** созданной задачи передается между запросами через переменную коллекции _**jiraTaskKey**_, которая не требует ручного заполнения.\n\n##### Запросы задания:\n\n- **POST ДЗ 28-1 JIRA createIssue Данные по цепочке**\n- **GET ДЗ 28-1 JIRA getIssue Данные по цепочке**\n    \n\n##### Примечание:\n\n1. Запросы к ресурсу **JIRA** требуют авторизации. Параметры авторизации хранятся и заполняются в глобальных переменных _**ATL_USERNAME**_ и _**ALT_PSW**_, метод авторизации в запросах - **Basic Auth**.\n2. Запросы к ресурсу **DADATA** требуют авторизации. Параметры авторизации хранятся и заполняются в глобальных переменных **DADATA_AUTH_KEY** и **DADATA_AUTH_VALUE**, метод авторизации в запросах - **API Key**.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23386398",
+		"_collection_link": "https://lively-capsule-55441.postman.co/workspace/%25D0%2590%25D0%25B2%25D1%2582%25D0%25BE%25D0%25BC%25D0%25B0%25D1%2582%25D0%25B8%25D0%25B7%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D1%2582%25D0%25B5%25D1%2581%25D1%2582%25D0%25BE%25D0%25B2-%25D0%25B4%25D0%25BB%25D1%258F-REST-A~f0af8592-a4dc-4fe3-aed5-135832153c62/collection/23386398-4725f4be-2303-4c16-8ce9-4ea9912c9a93?action=share&source=collection_link&creator=23386398"
+	},
+	"item": [
+		{
+			"name": "ДЗ",
+			"item": [
+				{
+					"name": "ДЗ 24 DADATA Параметризация авторизации",
+					"item": [
+						{
+							"name": "ДЗ 24 DADATA  Поиск по фамилии Авторизация в Authorization",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"В заголовке ответа представлен Content-Type и его значение application/json\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\").toUpperCase(), \"Тип содержимого - application/json\").to.include(\"json\".toUpperCase());\r",
+											"});\r",
+											"\r",
+											"let jsonData = pm.response.json(); // распарсили ответ\r",
+											"let SearchName = \"Малахов\"; // Что ищем\r",
+											"let resultArr = jsonData.suggestions.filter(item => item.data.surname === SearchName); // у массива suggestions вызываем метод filter\r",
+											"                                                                                // и помещаем в результирующий массив resultArr\r",
+											"                                                                                // все элементы, у которых .data.surnamee равно искомой \r",
+											"                                                                                // строке \r",
+											"                                                                                // Если функция из filter возвращает true, то \r",
+											"                                                                                // элемент помещается в результирующий массив \r",
+											"                                                                                // resultArr\r",
+											"\r",
+											"console.clear();\r",
+											"console.log(resultArr);\r",
+											"\r",
+											"pm.test(\"Искомая фамилия (Малахов) найдена Успех\", function () {\r",
+											"   pm.expect(resultArr.length).to.be.above(0);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Искомая фамилия (Малахов) найдена Падение\", function () {\r",
+											"   pm.expect(resultArr).to.be.empty;\r",
+											"});\r",
+											"\r",
+											"SearchName = \"Малахидзе\";\r",
+											"resultArr = jsonData.suggestions.filter(item => item.data.surname === SearchName);\r",
+											"pm.test(\"Искомая фамилия (Малахов) найдена Падение\", function () {\r",
+											"   pm.expect(resultArr.length).to.be.above(0);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true,
+									"content-type": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{DADATA_AUTH_VALUE}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "{{DADATA_AUTH_KEY}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{daDataToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\": \"Андрей Мал\"\r\n}"
+								},
+								"url": {
+									"raw": "{{DADATA_URL}}/fio",
+									"host": [
+										"{{DADATA_URL}}"
+									],
+									"path": [
+										"fio"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ДЗ 24 DADATA  Поиск по фамилии Авторизация в Headers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = xml2Json(responseBody).SuggestResponse; //Декодировали xml в json и учли доаолнительный элемент после декодирования - SuggestResponse\r",
+											"\r",
+											"pm.test(\"В заголовке ответа представлен Content-Type и его значение application/xml\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\").toUpperCase(), \"Тип содержимого - application/xml\").to.include(\"xml\".toUpperCase());\r",
+											"});\r",
+											"\r",
+											"let SearchName = \"Малахов\"; // Что ищем\r",
+											"let resultArr = jsonData.suggestions.filter(item => item.data.surname === SearchName); // у массива suggestions вызываем метод filter\r",
+											"                                                                                // и помещаем в результирующий массив resultArr\r",
+											"                                                                                // все элементы, у которых .data.surnamee равно искомой \r",
+											"                                                                                // строке \r",
+											"                                                                                // Если функция из filter возвращает true, то \r",
+											"                                                                                // элемент помещается в результирующий массив \r",
+											"                                                                                // resultArr\r",
+											"\r",
+											"console.clear();\r",
+											"console.log(resultArr);\r",
+											"\r",
+											"pm.test(\"Искомая фамилия (Малахов) найдена Успех\", function () {\r",
+											"   pm.expect(resultArr.length).to.be.above(0);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Искомая фамилия (Малахов) найдена Падение\", function () {\r",
+											"   pm.expect(resultArr).to.be.empty;\r",
+											"});\r",
+											"\r",
+											"SearchName = \"Малахидзе\";\r",
+											"resultArr = jsonData.suggestions.filter(item => item.data.surname === SearchName);\r",
+											"pm.test(\"Искомая фамилия (Малахов) найдена Падение\", function () {\r",
+											"   pm.expect(resultArr.length).to.be.above(0);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{DADATA_AUTH_VALUE}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<req>\r\n    <query>Андрей Мал</query>\r\n</req>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DADATA_URL}}/fio",
+									"host": [
+										"{{DADATA_URL}}"
+									],
+									"path": [
+										"fio"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ДЗ 25 SHOP create Создать товар с рандомной ценой",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Фото вставлено в тело запроса после конвертации на ресурсе https://www.base64-image.de/"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Лапсердак\",\r\n    \"section\":\"Верхняя одежда\",\r\n    \"description\":\"Сюртук, который вешал на стул приснопамятный музыкант!\",\r\n    \"color\":\"BLUE\",\r\n    \"size\":52,\r\n    \"price\":{{$randomPrice}},\r\n    \"params\":\"dress\",\r\n    \"photo\":\"data:image/jpeg;base64,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\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SHOP_URL}}/items/create/",
+							"host": [
+								"{{SHOP_URL}}"
+							],
+							"path": [
+								"items",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 26-1 USER doRegister Создать пользователя",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.request.body.formdata.find(el => el.key === 'email').value = pm.variables.replaceIn('{{$randomEmail}}').toLowerCase();\r",
+									"\r",
+									"// Зачем это всё: запрос getUser ищет только e-mail в нижнем регистре.\r",
+									"// Тело запроса у нас в form-data, значит параметры запроса хранятся в нем в виде массива объектов.\r",
+									"// Мы ищем в этом массиве объект с ключем 'email' и меняем ему значение на рандомный email, но в нижнем регистре.\r",
+									"// После этой замены запрос с модифицированным email отправляется на сервер."
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"userEmail\", jsonData.email);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{$randomEmail}}",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "{{$randomFullName}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{$randomUUID}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/doregister",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"doregister"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 26-2 USER getUser Получить информацию о пользователе",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{userEmail}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/getuserfull",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"getuserfull"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 27 USER updateUserOneField Изменить указанное поле пользователя",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"let hobbyValue = pm.request.body.formdata.find(el => el.key === 'value').value;\r",
+									"let emailValue = pm.request.body.formdata.find(el => el.key === 'email').value;\r",
+									"console.log(hobbyValue);\r",
+									"\r",
+									"pm.test(`Поле хобби успешно обновлено у пользователя с e-mail ${emailValue}`, function () {\r",
+									"   pm.expect(jsonData.message).to.include(emailValue).and.include(hobbyValue);\r",
+									"});\r",
+									"\r",
+									"console.clear();\r",
+									"console.log(JSON.stringify(pm.request.toJSON(), null, 2));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{userEmail}}",
+									"type": "text"
+								},
+								{
+									"key": "field",
+									"value": "hobby",
+									"type": "text"
+								},
+								{
+									"key": "value",
+									"value": "{{$randomWord}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/useronefield",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"useronefield"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 28 USER magicSearch Входные данные из файла",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"let orStCode = pm.iterationData.get(\"code\");\r",
+									"let orCount = pm.iterationData.get(\"count\");\r",
+									"\r",
+									"pm.test(`Получен верный статус-код [Статус-код: ${orStCode}]`, function () {\r",
+									"    pm.expect(pm.response.code).to.eql(orStCode);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Получен верный статус-код [Статус: OK]\", function () {\r",
+									"    pm.response.to.have.status(\"Ok\".toUpperCase());\r",
+									"});\r",
+									"\r",
+									"if (orCount < 2) {\r",
+									"    pm.test(`Количество подсказок равно ${orCount}`, function () {\r",
+									"        pm.expect(jsonData.foundCount).to.eql(orCount);\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(`Количество подсказок больше или равно ${orCount}`, function () {\r",
+									"        pm.expect(jsonData.foundCount).to.be.least(orCount);\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let curQuery = pm.iterationData.get(\"query\");\r",
+									"pm.collectionVariables.set(\"iterationQuery\", JSON.stringify(curQuery));\r",
+									"\r",
+									"// В теле запроса строка Query должна быть в кавычках, но из pm.iterationData она попадала в тело запроса без кавычек\r",
+									"// Поэтому пришлось использовать переходник pm.collectionVariables.set(\"iterationQuery\", JSON.stringify(curQuery))\r",
+									"// Данные для итерации грузились из json-файла:\r",
+									"/*[{\r",
+									"  \"query\": \"Емельян Пугачев\",\r",
+									"  \"fullSimilarity\": false,\r",
+									"  \"count\": 0,\r",
+									"  \"code\": 230\r",
+									"}, {\r",
+									"  \"query\": \"Фёдоров\",\r",
+									"  \"fullSimilarity\": false,\r",
+									"  \"count\": 1,\r",
+									"  \"code\": 231\r",
+									"},{\r",
+									"  \"query\": \"Сидоров\",\r",
+									"  \"fullSimilarity\": false,\r",
+									"  \"count\": 2,\r",
+									"  \"code\": 232\r",
+									"},{\r",
+									"  \"query\": \"Цирк и клоуны\",\r",
+									"  \"fullSimilarity\": true,\r",
+									"  \"count\": 1,\r",
+									"  \"code\": 233\r",
+									"},{\r",
+									"  \"query\": \"Цирк\",\r",
+									"  \"fullSimilarity\": false,\r",
+									"  \"count\": 2,\r",
+									"  \"code\": 234\r",
+									"},{\r",
+									"  \"query\": \"Цирк Сидоров\",\r",
+									"  \"fullSimilarity\": false,\r",
+									"  \"count\": 2,\r",
+									"  \"code\": 235\r",
+									"}] */"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":{{iterationQuery}},\r\n\"fullSimilarity\":{{fullSimilarity}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 28-1 JIRA createIssue Данные по цепочке",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"jiraTaskKey\", jsonData.key);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{ALT_PSW}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{ATL_USERNAME}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fields\": {\r\n\t\"project\": {\r\n\t\t\"key\": {{jiraPrjKey}}\r\n\t},\r\n\t\"issuetype\": {\r\n\t\t\"id\": {{jiraIssuetypeId}}\r\n\t},\r\n\t\"summary\": {{jiraSummary}},\r\n\t\"description\": {\r\n            \"version\": 1,\r\n            \"type\": \"doc\",\r\n            \"content\": [\r\n                {\r\n                    \"type\": \"paragraph\",\r\n                    \"content\": [\r\n                        {\r\n                            \"type\": \"text\",\r\n                            \"text\": {{jiraDescription}}\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{JIRA_URL}}/issue",
+							"host": [
+								"{{JIRA_URL}}"
+							],
+							"path": [
+								"issue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 28-1 JIRA getIssue Данные по цепочке",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"let jiraPrjKey = JSON.parse(pm.collectionVariables.get(\"jiraPrjKey\"));\r",
+									"let jiraIssuetypeId = JSON.parse(pm.collectionVariables.get(\"jiraIssuetypeId\"));\r",
+									"let jiraSummary = JSON.parse(pm.collectionVariables.get(\"jiraSummary\"));\r",
+									"let jiraDescription = JSON.parse(pm.collectionVariables.get(\"jiraDescription\"));\r",
+									"let jiraTaskKey = pm.collectionVariables.get(\"jiraTaskKey\");\r",
+									"\r",
+									"pm.test(\"Задача JIRA найдена [Статус-код 200]\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Полученный ключ проекта ${jiraPrjKey} совпадает с ключем проекта из запроса`, function () {\r",
+									"    pm.expect(jsonData.fields.project.key).to.eql(jiraPrjKey);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Полученный идентификатор задачи ${jiraTaskKey} совпадает с идентификатором задачи из запроса`, function () {\r",
+									"    pm.expect(jsonData.key).to.eql(jiraTaskKey);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Полученный тип задачи совпадает с типом задачи из запроса`, function () {\r",
+									"    pm.expect(jsonData.fields.issuetype.id).to.eql(jiraIssuetypeId);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Полученный заголовок задачи \"${jiraSummary}\" совпадает с заголовком задачи из запроса`, function () {\r",
+									"    pm.expect(jsonData.fields.summary).to.eql(jiraSummary);\r",
+									"});\r",
+									"\r",
+									"let contentDescription = jsonData.fields.description.content.find(el => el.content.find(elm => elm.text === jiraDescription))?.content[0].text;\r",
+									"// В массиве fields.description.content ищем элемент, у которого в ключе content (тоже массив) есть элемент, у которого значение ключа text равно содержимому нашей переменной jiraDescription. Поскольку для поиска в массиве используется метод find(), то найденный элемент будет 1, либо его не будет вообще. Поэтому мы обращаемся к содержимому после поиска как content[0].text. На случай, если ничего не найдено, мы проверяем (знак ?), существует ли свойство правее знака ? (?.content[0].text) и если его нет, contentDescription принимает значение undefined \r",
+									"\r",
+									"pm.test(`Полученное описание задачи \"${jiraDescription}\" совпадает с описанием задачи из запроса`, function () {\r",
+									"    pm.expect(contentDescription).to.eql(jiraDescription);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//pm.request.addQueryParams(\"foo=bar\");\r",
+									"//console.log(pm.request.url.variables.find(el => el.key === \"issueIdOrKey\").value);\r",
+									"//pm.request.url.variables.find(el => el.key === \"issueIdOrKey\").value = \"123\";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{ALT_PSW}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{ATL_USERNAME}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{JIRA_URL}}/issue/:issueIdOrKey",
+							"host": [
+								"{{JIRA_URL}}"
+							],
+							"path": [
+								"issue",
+								":issueIdOrKey"
+							],
+							"variable": [
+								{
+									"key": "issueIdOrKey",
+									"value": "{{jiraTaskKey}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userEmail",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "iterationQuery",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "jiraPrjKey",
+			"value": "\"TEST\"",
+			"type": "string"
+		},
+		{
+			"key": "jiraIssuetypeId",
+			"value": "\"10103\"",
+			"type": "string"
+		},
+		{
+			"key": "jiraSummary",
+			"value": "\"Тестовый баг №2\"",
+			"type": "string"
+		},
+		{
+			"key": "jiraDescription",
+			"value": "\"Описание тестового бага №2\"",
+			"type": "string"
+		},
+		{
+			"key": "jiraTaskKey",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "4193936a-4cf9-42b8-ac65-e6f18c1ed552",
+		"name": "Урок 05 ДЗ Задание 23-1",
+		"description": "## **Коллекция ДЗ Задание 23-1**\n\n#### Задание 23-1.\n\n**DADATA**, поиск по фамилии. Протестируйте, согласно требованиям, параметр запроса _**count**_.\n\n##### Требования:\n\n- _**count**_ - число.\n- _**Максимальное**_ _**значение**_ - **20**.\n- _**Значение по умолчанию**_ - **10**.\n- Если в параметре _**count**_ передается значение, **меньшее 0**, то в возвращаемом массиве количество элементов будет равняться либо **10**, либо находится в диапазоне **\\[1, 10\\]**, если количество фактически найденных элементов на сервере **меньше 11**.\n- Если в параметре _**count**_ передается значение, **большее 20**, то в возвращаемом массиве количество элементов будет равняться либо **20**, либо находится в диапазоне **\\[1, 20\\]**, если количество фактически найденных элементов на сервере **меньше 21**.\n- Если в параметре _**count**_ передается значение, **большее**, либо **равное 1**, но **меньшее**, либо **равное 20**, то в возвращаемом массиве количество элементов будет равняться либо **переданному значению**, либо находится в диапазоне **\\[1, \"переданное значение\"\\]**, если количество фактически найденных элементов на сервере **меньше переданного значения**.\n    \n\n##### Данные:\n\nПроверки разделены на позитивные и негативные.\n\nС учетом требований, граничных значений и предельного максимального/минимального значения целого числа, были подготовлены следующие наборы данных для позитивных и негативных проверок:\n\nПодготовленные данные для позитивных проверок (_**count**_ - значение передаваемого параметра, _**expResult**_ - ожидаемое количество элементов в возвращенном массиве)\n\n``` javascript\n[\n{\"count\":19, \"expResult\":19}, \n{\"count\":20, \"expResult\":20}, \n{\"count\":21, \"expResult\":20},\n{\"count\":-1, \"expResult\":10}, \n{\"count\":0, \"expResult\":10}, \n{\"count\":1, \"expResult\":1}, \n{\"count\":7.95, \"expResult\":7}, \n{\"count\":\"7\", \"expResult\":7}, \n{\"count\":null, \"expResult\":10}, \n{\"count\":\"empty\", \"expResult\":10}, \n{\"count\":2147483647, \"expResult\":20}, \n{\"count\":2147483646, \"expResult\":20}, \n{\"count\":-2147483648, \"expResult\":10}, \n{\"count\":-2147483647, \"expResult\":10}\n]\n\n ```\n\nПодготовленные данные для негативных проверок (_**count**_ - значение передаваемого параметра, _**expResult**_ - ожидаемый статус-код ответа сервера)\n\n``` javascript\n[\n{\"count\":2147483648, \"expResult\":400}, \n{\"count\":-2147483649, \"expResult\":400}, \n{\"count\":true, \"expResult\":400}, \n{\"count\":\"7.95\", \"expResult\":400}, \n{\"count\":\"7,95\", \"expResult\":400}, \n{\"count\":\"asd\", \"expResult\":400}, \n{\"count\":[2, 75, 4], \"expResult\":400}, \n{\"count\":{\"a\":15, \"b\": \"asd\"}, \"expResult\":400}\n]\n\n ```\n\nДанные передаются в коллекцию в переменных коллекции **dataPositiv** и **dataNegativ** соответственно. Строка поиска передается в переменной коллекции **curQuery**. Остальные переменные коллекции - вспомогательные и служат для хранения текущих значений тела запроса и ожидаемого результата.\n\nКоллекцию необходимо **запускать в раннере Postman**. Дополнительных файлов с данными не требуется.\n\n##### Запросы задания:\n\n- **POST** **ДЗ 23-1 DADATA Тестируем ключ count Позитивные проверки**\n- **POST ДЗ 23-1 DADATA Тестируем ключ count Негативные проверки**\n    \n\n##### Примечание:\n\n1. Запросы к ресурсу **DADATA** требуют авторизации. Параметры авторизации хранятся и заполняются в глобальных переменных **DADATA_AUTH_KEY** и **DADATA_AUTH_VALUE**, метод авторизации в запросах - **API Key**.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23386398",
+		"_collection_link": "https://lively-capsule-55441.postman.co/workspace/%25D0%2590%25D0%25B2%25D1%2582%25D0%25BE%25D0%25BC%25D0%25B0%25D1%2582%25D0%25B8%25D0%25B7%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D1%2582%25D0%25B5%25D1%2581%25D1%2582%25D0%25BE%25D0%25B2-%25D0%25B4%25D0%25BB%25D1%258F-REST-A~f0af8592-a4dc-4fe3-aed5-135832153c62/collection/23386398-4193936a-4cf9-42b8-ac65-e6f18c1ed552?action=share&source=collection_link&creator=23386398"
+	},
+	"item": [
+		{
+			"name": "ДЗ 23-1 DADATA Тестируем ключ count Позитивные проверки",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let curQuery = !pm.collectionVariables.get(\"curQuery\") ? \"\" : JSON.parse(pm.collectionVariables.get(\"curQuery\"));\r",
+							"// считываем переменную окружения curQuery - текст поиска; если переменная null - то пустая строка, иначе - парсим\r",
+							"\r",
+							"let curBody = {}; // тело запроса - пустое\r",
+							"\r",
+							"let dataPositiv = !pm.collectionVariables.get(\"dataPositiv\") ? [] : JSON.parse(pm.collectionVariables.get(\"dataPositiv\"));\r",
+							"// считываем переменную окружения dataPositiv - массив значений пар тестовое значение-ОР; если переменная null - то [], иначе - парсим \r",
+							"\r",
+							"let curData = dataPositiv.shift(); // откусываем от массива dataPositiv 1-й элемент и записываем его в curData\r",
+							"pm.collectionVariables.set(\"dataPositiv\", JSON.stringify(dataPositiv)); // записываем подрезанный массив обратно в переменную окружения dataPositiv\r",
+							"\r",
+							"// Начинаем собирать тело запроса\r",
+							"curBody.query = curQuery; // ключ тела запроса query\r",
+							"if (curData.count != \"empty\") { // если запрос надо отправлять с ключом count, то добавляем в тело запроса ключ count\r",
+							"    curBody.count = curData.count; // ключ тела запроса count\r",
+							"}\r",
+							"curExpResult = curData.expResult; // текущий ОР для текущих тестовых данных\r",
+							"\r",
+							"pm.collectionVariables.set(\"curBody\", JSON.stringify(curBody)); // записываем собранное тело запроса curBody в переменную окружения curBody\r",
+							"pm.collectionVariables.set(\"curExpResult\", JSON.stringify(curExpResult)); // записываем текущий ОР в переменную окружения curExpResult\r",
+							"\r",
+							"//console.clear();\r",
+							"console.log(\"==========================================\");\r",
+							"console.log(curBody);\r",
+							"console.log(curExpResult);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"let requestParams = JSON.parse(request.data);\r",
+							"const dataPositiv = JSON.parse(pm.collectionVariables.get(\"dataPositiv\")); // для контроля массива данных, выход из вызова запроса, если массив []\r",
+							"// получаем текущее ОР для запроса\r",
+							"let curExpResult = !pm.collectionVariables.get(\"curExpResult\") ? null : JSON.parse(pm.collectionVariables.get(\"curExpResult\"));\r",
+							"\r",
+							"console.log(\"ожидаемый результат - \", curExpResult);\r",
+							"console.log(\"количество элементов в массиве suggestions - \", jsonData.suggestions.length);\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"console.log(\"==========================================\");\r",
+							"\r",
+							"pm.test(\"По запросу найдены релевантные записи [Код: 200]\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"По запросу найдены релевантные записи [Статус: Ok]\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"В заголовке ответа представлен Content-Type и его значение application/json\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\"), \"Тип содержимого - application/json\").match(/^application\\/json/i);\r",
+							"});    \r",
+							"\r",
+							"pm.test(\"Тело ответа не пустое\", function () {\r",
+							"    pm.expect(jsonData).to.be.an(\"object\").that.has.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Список найденных записей suggestions существует\", function () {\r",
+							"    pm.expect(jsonData.suggestions).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"if (!requestParams.count || Math.trunc(requestParams.count) <= 0) {\r",
+							"    pm.test(`При значении параметра count = ${JSON.stringify(requestParams.count)} количество найденных записей должно находиться в диапазоне от 1 до 10 `, function () {\r",
+							"    pm.expect(jsonData.suggestions.length).to.be.within(1, 10);\r",
+							"    });\r",
+							"} else if (Math.trunc(requestParams.count) > 20) {\r",
+							"    pm.test(`При значении параметра count = ${JSON.stringify(requestParams.count)} количество найденных записей должно находиться в диапазоне от 1 до 20`, function () {\r",
+							"    pm.expect(jsonData.suggestions.length).to.be.within(1, 20);\r",
+							"    });\r",
+							"} else {\r",
+							"    pm.test(`При значении параметра count = ${JSON.stringify(requestParams.count)} количество найденных записей должно находиться в диапазоне от 1 до ${Math.trunc(requestParams.count)}`, function () {\r",
+							"    pm.expect(jsonData.suggestions.length).to.be.within(1, Math.trunc(requestParams.count));\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"if (dataPositiv && dataPositiv.length > 0){\r",
+							"    postman.setNextRequest(\"Задание 23-1 Запрос к DaData fio Тестируем ключ count Позитивные проверки\");\r",
+							"} else {\r",
+							"    postman.setNextRequest(\"Задание 23-1 Запрос к DaData fio Тестируем ключ count Негативные проверки\");\r",
+							"}\r",
+							"// если <=0, то либо 10, либо [1, 10]\r",
+							"// если >20, то либо 20, либо [1, 20]\r",
+							"// если >=1 и <=20, то либо curCount, либо [1, curCount]\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{DADATA_AUTH_VALUE}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{DADATA_AUTH_KEY}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{curBody}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{DADATA_URL}}/fio",
+					"host": [
+						"{{DADATA_URL}}"
+					],
+					"path": [
+						"fio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ДЗ 23-1 DADATA Тестируем ключ count Негативные проверки",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let curQuery = !pm.collectionVariables.get(\"curQuery\") ? \"\" : JSON.parse(pm.collectionVariables.get(\"curQuery\"));\r",
+							"// считываем переменную окружения curQuery - текст поиска; если переменная null - то пустая строка, иначе - парсим\r",
+							"\r",
+							"let curBody = {}; // тело запроса - пустое\r",
+							"\r",
+							"let dataNegativ = !pm.collectionVariables.get(\"dataNegativ\") ? [] : JSON.parse(pm.collectionVariables.get(\"dataNegativ\"));\r",
+							"// считываем переменную окружения dataNegativ - массив значений пар тестовое значение-ОР; если переменная null - то [], иначе - парсим \r",
+							"\r",
+							"let curData = dataNegativ.shift(); // откусываем от массива dataNegativ 1-й элемент и записываем его в curData\r",
+							"pm.collectionVariables.set(\"dataNegativ\", JSON.stringify(dataNegativ)); // записываем подрезанный массив обратно в переменную окружения dataNegativ\r",
+							"\r",
+							"// Начинаем собирать тело запроса\r",
+							"curBody.query = curQuery; // ключ тела запроса query\r",
+							"curBody.count = curData.count; // ключ тела запроса count\r",
+							"curExpResult = curData.expResult; // текущий ОР для текущих тестовых данных\r",
+							"\r",
+							"pm.collectionVariables.set(\"curBody\", JSON.stringify(curBody)); // записываем собранное тело запроса curBody в переменную окружения curBody\r",
+							"pm.collectionVariables.set(\"curExpResult\", JSON.stringify(curExpResult)); // записываем текущий ОР в переменную окружения curExpResult\r",
+							"\r",
+							"//console.clear();\r",
+							"console.log(\"==========================================\");\r",
+							"console.log(curBody);\r",
+							"console.log(curExpResult);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"let requestParams = JSON.parse(request.data);\r",
+							"const dataNegativ = JSON.parse(pm.collectionVariables.get(\"dataNegativ\")); // для контроля массива данных, выход из вызова запроса, если массив []\r",
+							"// получаем текущее ОР для запроса\r",
+							"let curExpResult = !pm.collectionVariables.get(\"curExpResult\") ? null : JSON.parse(pm.collectionVariables.get(\"curExpResult\"));\r",
+							"\r",
+							"console.log(\"ожидаемый результат - \", curExpResult);\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"console.log(\"==========================================\");\r",
+							"\r",
+							"pm.test(`По запросу с параметром count = ${JSON.stringify(requestParams.count)} возвращена ошибка [Код: 400, статус: Bad Request]`, function () {\r",
+							"    pm.response.to.have.status(400).and.to.have.status(\"Bad Request\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"В заголовке ответа представлен Content-Type и его значение application/json\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\"), \"Тип содержимого - application/json\").match(/^application\\/json/i);\r",
+							"});    \r",
+							"\r",
+							"pm.test(\"Тело ответа не пустое\", function () {\r",
+							"    pm.expect(jsonData).to.be.an(\"object\").that.has.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Сообщение об ошибке существует и оно не пустое\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.an(\"string\").that.has.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"if (dataNegativ && dataNegativ.length > 0){\r",
+							"    postman.setNextRequest(\"Задание 23-1 Запрос к DaData fio Тестируем ключ count Негативные проверки\");\r",
+							"} else {\r",
+							"    postman.setNextRequest(null);\r",
+							"}\r",
+							"// если <=0, то либо 10, либо [1, 10]\r",
+							"// если >20, то либо 20, либо [1, 20]\r",
+							"// если >=1 и <=20, то либо curCount, либо [1, curCount]\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{DADATA_AUTH_VALUE}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{DADATA_AUTH_KEY}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{curBody}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{DADATA_URL}}/fio",
+					"host": [
+						"{{DADATA_URL}}"
+					],
+					"path": [
+						"fio"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "curQuery",
+			"value": "\"Андре\"",
+			"type": "string"
+		},
+		{
+			"key": "curExpResult",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "curBody",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "dataPositiv",
+			"value": "[{\"count\":19, \"expResult\":19}, {\"count\":20, \"expResult\":20}, {\"count\":21, \"expResult\":20}, {\"count\":-1, \"expResult\":10}, {\"count\":0, \"expResult\":10}, {\"count\":1, \"expResult\":1}, {\"count\":7.95, \"expResult\":7}, {\"count\":\"7\", \"expResult\":7}, {\"count\":null, \"expResult\":10}, {\"count\":\"empty\", \"expResult\":10}, {\"count\":2147483647, \"expResult\":20}, {\"count\":2147483646, \"expResult\":20}, {\"count\":-2147483648, \"expResult\":10}, {\"count\":-2147483647, \"expResult\":10}]",
+			"type": "string"
+		},
+		{
+			"key": "dataNegativ",
+			"value": "[{\"count\":2147483648, \"expResult\":400}, {\"count\":-2147483649, \"expResult\":400}, {\"count\":true, \"expResult\":400}, {\"count\":\"7.95\", \"expResult\":400}, {\"count\":\"7,95\", \"expResult\":400}, {\"count\":\"asd\", \"expResult\":400}, {\"count\":[2, 75, 4], \"expResult\":400}, {\"count\":{\"a\":15, \"b\": \"asd\"}, \"expResult\":400}]",
+			"type": "string"
+		}
+	]
+}

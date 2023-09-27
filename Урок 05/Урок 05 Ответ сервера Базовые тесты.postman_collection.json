@@ -1,0 +1,1439 @@
+{
+	"info": {
+		"_postman_id": "34933ee4-98df-423b-bf82-0cec74695a42",
+		"name": "Урок 05 Ответ сервера Базовые тесты",
+		"description": "## **Коллекция ДЗ Урок 5.** Ответ сервера. Базовые тесты\n\n#### Задание 16.\n\n**JIRA**, метод **getIssue**. Обратиться к задаче _**TV-4**_ и проверить типы элементов _**fixVersions**_, _**watches**_, _**workratio**_ и _**issuelinks**_ в ответе сервера.\n\n##### Запрос задания:\n\n- **GET ДЗ 16 JIRA getIssue Это точно запрошенная задача II**\n    \n\n#### Задание 17.\n\nСоздайте объект _**JavaScript**_, описывающий сущность _**кошечка**_. Создайте переменную с помощью конструктора этого объекта и проверьте, что:\n\n1. Это действительно объект.\n2. Он создан конструктором кошечка.\n    \n\n##### Запрос задания:\n\n- **POST ДЗ 17 Проверка конструктора объекта**\n    \n\n#### Задание 18.\n\n**DADATA**, поиск по фамилии. Отправить запрос со следующим телом:\n\n``` javascript\n{\n\"query\": \"Андрей Мал\"\n}\n\n ```\n\nНаписать автотесты, проверяющие, есть ли в ответе сервера искомая фамилия.\n\n##### Запрос задания:\n\n- **POST ДЗ 18 DADATA Поиск заданной фамилии**\n    \n\n#### Задание 19.\n\n**USERS**, метод _**magicSearch**_. Написать автотесты, проверяющие статус-коды _**230-235**_ на значения, а также на количество элементов в ответе и типы этих элементов.\n\n##### Запросы задания:\n\n- **GET Папка ДЗ 19 USER** _**magicSearch**_ **Тестирование статусов 230-235**\n    \n\n#### Задание 20.\n\n**USERS**, метод _**magicSearch**_. Написать автотесты, проверяющие статус-коды _**455-459**_ на значения, а также на количество элементов в ответе и типы этих элементов.\n\n##### Запросы задания:\n\n- **GET Папка ДЗ 19 USER** _**magicSearch**_ **Тестирование статусов 455-459**\n    \n\n#### Задание 21.\n\n**USERS**, метод _**magicSearch**_. Написать автотесты, проверяющие статус-коды _**455-459**_ на значения, а также на количество элементов в ответе и типы этих элементов. Тестирование проводить средствами **Node.js**\n\n##### Запросы задания:\n\n- **GET Папка ДЗ 21 USER** _**magicSearch**_ **Тестирование статусов 455-459 NodeJS**\n    \n\n#### Задание 22.\n\n**DADATA**, поиск по фамилии. Отправить запрос со следующим телом (формат _**XML**_):\n\n``` xml\n<req>\n    <query>Андрей Мал</query>\n</req>\n\n ```\n\nНаписать автотесты, проверяющие, есть ли в ответе сервера искомая фамилия. Учитываем то, что ответ от сервера тоже придет в формате _**XML**_\n\n##### Запрос задания:\n\n- **POST ДЗ 22 DADATA Поиск заданной фамилии XML**\n    \n\n#### Задание 23.\n\n**JIRA**, метод **getIssue**. Обратиться к задаче _**TV-4**_ и убедиться в том, что:\n\nЗаголовок **Server** - _**AtlassianProxy**_.\n\nВ заголовке **Content-Type** указано _**charset=UTF-8**_.\n\nЗначение **cookies**, полученное от сервера, верное.\n\n##### Запрос задания:\n\n- **GET ДЗ 23 JIRA getIssue Тестирование заголовков и cookie**\n    \n\n##### Примечание:\n\n1. Запросы к ресурсу **JIRA** требуют авторизации. Параметры авторизации хранятся и заполняются в глобальных переменных _**ATL_USERNAME**_ и _**ALT_PSW**_, метод авторизации в запросах - **Basic Auth**.\n2. Запросы к ресурсу **DADATA** требуют авторизации. Параметры авторизации хранятся и заполняются в глобальных переменных **DADATA_AUTH_KEY** и **DADATA_AUTH_VALUE**, метод авторизации в запросах - **API Key**.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23386398",
+		"_collection_link": "https://lively-capsule-55441.postman.co/workspace/%25D0%2590%25D0%25B2%25D1%2582%25D0%25BE%25D0%25BC%25D0%25B0%25D1%2582%25D0%25B8%25D0%25B7%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D1%2582%25D0%25B5%25D1%2581%25D1%2582%25D0%25BE%25D0%25B2-%25D0%25B4%25D0%25BB%25D1%258F-REST-A~f0af8592-a4dc-4fe3-aed5-135832153c62/collection/23386398-34933ee4-98df-423b-bf82-0cec74695a42?action=share&source=collection_link&creator=23386398"
+	},
+	"item": [
+		{
+			"name": "ДЗ",
+			"item": [
+				{
+					"name": "ДЗ 19 USER magicSearch Тестирование статусов 230-235",
+					"item": [
+						{
+							"name": "Код 230 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"По запросу ничего не найдено [Статус-код: 230]\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(230);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"По запросу ничего не найдено [Статус: OK]\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Количество элементов в ответе равно 0\", function () {\r",
+											"    pm.expect(jsonData.results.length).to.eql(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"Емельян Пугачев\",\r\n\"fullSimilarity\":false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 231 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"По запросу найден 1 пользователь [Статус-код: 231]\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(231);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"По запросу найден 1 пользователь [Статус: OK]\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Количество элементов в ответе равно 1\", function () {\r",
+											"    pm.expect(jsonData.results.length).to.eql(1);\r",
+											"});\r",
+											"\r",
+											"let typeUser = jsonData.results.find(element => element.type === \"user\");\r",
+											"\r",
+											"pm.test(\"Тип элемента в ответе - user\", function () {\r",
+											"    pm.expect(!typeUser ? \"\" : typeUser.type).to.eql(\"user\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"Фёдоров\",\r\n\"fullSimilarity\":false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 232 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"По запросу найдено больше 1 пользователя, но без компаний [Статус-код: 232]\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(232);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"По запросу найдено больше 1 пользователя, но без компаний [Статус: OK]\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Количество элементов в ответе больше 1\", function () {\r",
+											"    pm.expect(jsonData.results.length).to.above(1);\r",
+											"});\r",
+											"\r",
+											"let typeCompany = jsonData.results.find(element => element.type === \"company\");\r",
+											"\r",
+											"pm.test(\"Тип элемента company в ответе отсутствует\", function () {\r",
+											"    pm.expect(!typeCompany ? \"\" : typeCompany.type).to.eql(\"\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"Сидоров\",\r\n\"fullSimilarity\":false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 233 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"По запросу найдена 1 компания [Статус-код: 233]\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(233);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"По запросу найден 1 компания [Статус: OK]\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Количество элементов в ответе равно 1\", function () {\r",
+											"    pm.expect(jsonData.results.length).to.eql(1);\r",
+											"});\r",
+											"\r",
+											"let typeCompany = jsonData.results.find(element => element.type === \"company\");\r",
+											"\r",
+											"pm.test(\"Тип элемента в ответе - company\", function () {\r",
+											"    pm.expect(!typeCompany ? \"\" : typeCompany.type).to.eql(\"company\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"Цирк и клоуны\",\r\n\"fullSimilarity\":true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 234 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"По запросу найдено больше 1 компании, но без пользователей [Статус-код: 234]\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(234);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"По запросу найдено больше 1 компании, но без пользователей [Статус: OK]\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Количество элементов в ответе больше 1\", function () {\r",
+											"    pm.expect(jsonData.results.length).to.above(1);\r",
+											"});\r",
+											"\r",
+											"let typeUser = jsonData.results.find(element => element.type === \"user\");\r",
+											"\r",
+											"pm.test(\"Тип элемента user в ответе отсутствует\", function () {\r",
+											"    pm.expect(!typeUser ? \"\" : typeUser.type).to.eql(\"\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"Цирк\",\r\n\"fullSimilarity\":false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 235 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"По запросу найдены как пользователи, так и компании [Статус-код: 235]\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(235);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"По запросу найдены как пользователи, так и компании [Статус: OK]\", function () {\r",
+											"    pm.response.to.have.status(\"OK\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Количество элементов в ответе больше 1\", function () {\r",
+											"    pm.expect(jsonData.results.length).to.above(1);\r",
+											"});\r",
+											"\r",
+											"let typeCompany = jsonData.results.find(element => element.type === \"company\");\r",
+											"let typeUser = jsonData.results.find(element => element.type === \"user\");\r",
+											"\r",
+											"console.log(typeCompany);\r",
+											"console.log(typeUser);\r",
+											"pm.test(\"В ответе присутствуют как элементы типа company, так и элементы типа user\", function () {\r",
+											"    pm.expect(!typeCompany ? \"\" : typeCompany.type, \"В ответе присутствуют элементы типа company\").to.eql(\"company\");\r",
+											"    pm.expect(!typeUser ? \"\" : typeUser.type, \"В ответе присутствуют элементы типа user\").to.eql(\"user\");\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"Цирк Сидоров\",\r\n\"fullSimilarity\":false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ДЗ 20 USER magicSearch Тестирование статусов 455-459",
+					"item": [
+						{
+							"name": "Код 455 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Не указан обязательный параметр query в запросе [Статус-код: 455]\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(455);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Не указан обязательный параметр query в запросе [Статус: ERROR]\", function () {\r",
+											"    pm.response.to.have.status(\"ERROR\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Сообщение об ошибке содержит текст: Не найден обязательный параметр query\", function () {\r",
+											"    pm.expect(jsonData.message).to.eql(\"Не найден обязательный параметр query\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Код внутри тела ответа соответствует статус-коду\", function () {\r",
+											"    pm.expect(jsonData.code_error == pm.response.code).to.be.true;\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"fullSimilarity\":false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 456 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Длина запроса превышает 1000 символов [Статус-код: 456]\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(456);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Длина запроса превышает 1000 символов [Статус: ERROR]\", function () {\r",
+											"    pm.response.to.have.status(\"ERROR\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Сообщение об ошибке содержит текст: Длина запроса не должна превышать 1000 символов\", function () {\r",
+											"    pm.expect(jsonData.message).to.eql(\"Длина запроса не должна превышать 1000 символов\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Код внутри тела ответа соответствует статус-коду\", function () {\r",
+											"    pm.expect(jsonData.code_error == pm.response.code).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД  НКВД Берия НКВД Берия НКВД Берия НКВД Берия\",\r\n\"fullSimilarity\":false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 457 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Параметр partyType не находится в наборе (ALL,USER, COMPANY) [Статус-код: 457]\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(457);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Параметр partyType не находится в наборе (ALL,USER, COMPANY) [Статус: ERROR]\", function () {\r",
+											"    pm.response.to.have.status(\"ERROR\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Сообщение об ошибке содержит текст: Параметр partyType может принимать только значения: ALL,USER, COMPANY\", function () {\r",
+											"    pm.expect(jsonData.message).to.eql(\"Параметр partyType может принимать только значения: ALL,USER, COMPANY\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Код внутри тела ответа соответствует статус-коду\", function () {\r",
+											"    pm.expect(jsonData.code_error == pm.response.code).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"НКВД Берия\",\r\n\"fullSimilarity\":false,\r\n\"partyType\":\"SUPER_USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 458 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Параметр taskStatus не находится в наборе (ALL, ACTUAL, COMPLETE, FAIL) [Статус-код: 458]\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(458);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Параметр taskStatus не находится в наборе (ALL, ACTUAL, COMPLETE, FAIL) [Статус: ERROR]\", function () {\r",
+											"    pm.response.to.have.status(\"ERROR\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Сообщение об ошибке содержит текст: Параметр taskStatus может принимать только значения: ALL, ACTUAL, COMPLETE, FAIL\", function () {\r",
+											"    pm.expect(jsonData.message).to.eql(\"Параметр taskStatus может принимать только значения: ALL, ACTUAL, COMPLETE, FAIL\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Код внутри тела ответа соответствует статус-коду\", function () {\r",
+											"    pm.expect(jsonData.code_error == pm.response.code).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"НКВД Берия\",\r\n\"fullSimilarity\":false,\r\n\"taskStatus\":\"SUPER_ALL\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 459 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Параметр include не находится в наборе (ALL, USER, COMPANY, TASK, WHY) [Статус-код: 459]\", function () {\r",
+											"    pm.expect(pm.response.code).to.eql(459);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Параметр include не находится в наборе (ALL, USER, COMPANY, TASK, WHY) [Статус: ERROR]\", function () {\r",
+											"    pm.response.to.have.status(\"ERROR\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Сообщение об ошибке содержит текст: Параметр include может принимать только значения: ALL, USER, COMPANY, TASK, WHY\", function () {\r",
+											"    pm.expect(jsonData.message).to.eql(\"Параметр include может принимать только значения: ALL, USER, COMPANY, TASK, WHY\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Код внутри тела ответа соответствует статус-коду\", function () {\r",
+											"    pm.expect(jsonData.code_error == pm.response.code).to.be.true;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"НКВД Берия\",\r\n\"fullSimilarity\":false,\r\n\"include\":\"SUPER_ALL\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ДЗ 21 USER magicSearch Тестирование статусов 455-459 NodeJS",
+					"item": [
+						{
+							"name": "Код 455 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const assert = require(\"assert\");\r",
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Не указан обязательный параметр query в запросе [Статус-код: 455]\", function () {\r",
+											"    assert.strictEqual(pm.response.code, 455);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Не указан обязательный параметр query в запросе [Статус: ERROR]\", function () {\r",
+											"    assert.strictEqual(pm.response.status, \"ERROR\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Сообщение об ошибке содержит текст: Не найден обязательный параметр query\", function () {\r",
+											"    assert.strictEqual(jsonData.message, \"Не найден обязательный параметр query\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Код внутри тела ответа соответствует статус-коду\", function () {\r",
+											"    assert.equal(jsonData.code_error, pm.response.code);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"fullSimilarity\":false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 456 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const assert = require(\"assert\");\r",
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Длина запроса превышает 1000 символов [Статус-код: 456]\", function () {\r",
+											"    assert.strictEqual(pm.response.code, 456);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Длина запроса превышает 1000 символов [Статус: ERROR]\", function () {\r",
+											"    assert.strictEqual(pm.response.status, \"ERROR\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Сообщение об ошибке содержит текст: Длина запроса не должна превышать 1000 символов\", function () {\r",
+											"    assert.strictEqual(jsonData.message, \"Длина запроса не должна превышать 1000 символов\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Код внутри тела ответа соответствует статус-коду\", function () {\r",
+											"    assert.equal(jsonData.code_error, pm.response.code);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД Берия НКВД  НКВД Берия НКВД Берия НКВД Берия НКВД Берия\",\r\n\"fullSimilarity\":false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 457 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const assert = require(\"assert\");\r",
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Параметр partyType не находится в наборе (ALL,USER, COMPANY) [Статус-код: 457]\", function () {\r",
+											"    assert.strictEqual(pm.response.code, 457);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Параметр partyType не находится в наборе (ALL,USER, COMPANY) [Статус: ERROR]\", function () {\r",
+											"    assert.strictEqual(pm.response.status, \"ERROR\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Сообщение об ошибке содержит текст: Параметр partyType может принимать только значения: ALL,USER, COMPANY\", function () {\r",
+											"    assert.strictEqual(jsonData.message, \"Параметр partyType может принимать только значения: ALL,USER, COMPANY\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Код внутри тела ответа соответствует статус-коду\", function () {\r",
+											"    assert.equal(jsonData.code_error, pm.response.code);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"НКВД Берия\",\r\n\"fullSimilarity\":false,\r\n\"partyType\":\"SUPER_USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 458 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const assert = require(\"assert\");\r",
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Параметр taskStatus не находится в наборе (ALL, ACTUAL, COMPLETE, FAIL) [Статус-код: 458]\", function () {\r",
+											"    assert.strictEqual(pm.response.code, 458);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Параметр taskStatus не находится в наборе (ALL, ACTUAL, COMPLETE, FAIL) [Статус: ERROR]\", function () {\r",
+											"    assert.strictEqual(pm.response.status, \"ERROR\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Сообщение об ошибке содержит текст: Параметр taskStatus может принимать только значения: ALL, ACTUAL, COMPLETE, FAIL\", function () {\r",
+											"    assert.strictEqual(jsonData.message, \"Параметр taskStatus может принимать только значения: ALL, ACTUAL, COMPLETE, FAIL\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Код внутри тела ответа соответствует статус-коду\", function () {\r",
+											"    assert.equal(jsonData.code_error, pm.response.code);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"НКВД Берия\",\r\n\"fullSimilarity\":false,\r\n\"taskStatus\":\"SUPER_ALL\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Код 459 magicSearch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const assert = require(\"assert\");\r",
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Параметр include не находится в наборе (ALL, USER, COMPANY, TASK, WHY) [Статус-код: 459]\", function () {\r",
+											"    assert.strictEqual(pm.response.code, 459);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Параметр include не находится в наборе (ALL, USER, COMPANY, TASK, WHY) [Статус: ERROR]\", function () {\r",
+											"    assert.strictEqual(pm.response.status, \"ERROR\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Сообщение об ошибке содержит текст: Параметр include может принимать только значения: ALL, USER, COMPANY, TASK, WHY\", function () {\r",
+											"    assert.strictEqual(jsonData.message, \"Параметр include может принимать только значения: ALL, USER, COMPANY, TASK, WHY\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Код внутри тела ответа соответствует статус-коду\", function () {\r",
+											"    assert.equal(jsonData.code_error, pm.response.code);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"query\":\"НКВД Берия\",\r\n\"fullSimilarity\":false,\r\n\"include\":\"SUPER_ALL\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ДЗ 16 JIRA getIssue  Это точно запрошенная задача II",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"console.clear();\r",
+									"pm.test(\"Тип fixVersions - массив (через instanceof()) Успех\", function () {\r",
+									"    pm.expect(jsonData.fields.fixVersions).to.be.an.instanceof(Array);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип fixVersions - массив (через instanceof()) Падение\", function () {\r",
+									"    pm.expect(jsonData.fields.fixVersions).to.be.an.instanceof(String);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип fixVersions - массив (через через an) Успех\", function () {\r",
+									"    pm.expect(jsonData.fields.fixVersions).to.be.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип fixVersions - массив (через через an) Падение\", function () {\r",
+									"    pm.expect(jsonData.fields.fixVersions).to.be.an(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип watches - объект (через instanceof()) Успех\", function () {\r",
+									"    pm.expect(jsonData.fields.watches).to.be.an.instanceof(Object).that.has.not.be.an.instanceof(Array);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип watches - объект (через instanceof()) Падение\", function () {\r",
+									"    pm.expect(jsonData.fields.watches, \"Проверка watches - это строка\").to.be.an.instanceof(String);\r",
+									"    pm.expect(jsonData.fields.watches, \"Проверка watches - это объект и массив \").to.be.an.instanceof(Object).that.has.be.an.instanceof(Array);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип watches - объект (через через an) Успех\", function () {\r",
+									"    pm.expect(jsonData.fields.watches).to.be.an(\"Object\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип watches - объект (через через an) Падение\", function () {\r",
+									"    pm.expect(jsonData.fields.watches).to.be.an(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип workratio - число Успех\", function () {\r",
+									"    pm.expect(jsonData.fields.workratio).to.be.an(\"number\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип workratio - число Падение\", function () {\r",
+									"    pm.expect(jsonData.fields.workratio).to.be.an(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип issuelinks - массив (через instanceof()) Успех\", function () {\r",
+									"    pm.expect(jsonData.fields.issuelinks).to.be.an.instanceof(Array);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип issuelinks - массив (через instanceof()) Падение\", function () {\r",
+									"    pm.expect(jsonData.fields.issuelinks).to.be.an.instanceof(String);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип issuelinks - массив (через через an) Успех\", function () {\r",
+									"    pm.expect(jsonData.fields.issuelinks).to.be.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Тип issuelinks - массив (через через an) Падение\", function () {\r",
+									"    pm.expect(jsonData.fields.issuelinks).to.be.an(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{ALT_PSW}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{ATL_USERNAME}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{JIRA_URL}}/issue/:issueIdOrKey",
+							"host": [
+								"{{JIRA_URL}}"
+							],
+							"path": [
+								"issue",
+								":issueIdOrKey"
+							],
+							"variable": [
+								{
+									"key": "issueIdOrKey",
+									"value": "TV-4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 17 Проверка конструктора объекта",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Опишем конструктор, создающий объект типа Cat",
+									"function Cat(catName, catYear){",
+									"    this.catName = catName;",
+									"    this.catYear = catYear;",
+									"}",
+									"",
+									"let catPussy = new Cat(\"Pussy\", 2); // создаем экземпляр объекта Cat конструктором cat",
+									"",
+									"pm.test(\"catPussy - объект (через instanceof()) Успех\", function () {",
+									"    pm.expect(catPussy).to.be.an.instanceof(Object);",
+									"});",
+									"",
+									"pm.test(\"catPussy - объект (через через an) Успех\", function () {",
+									"    pm.expect(catPussy).to.be.an(\"Object\");",
+									"});",
+									"",
+									"pm.test(\"catPussy - объект (через instanceof()) Падение\", function () {",
+									"    pm.expect(catPussy).to.be.an.instanceof(String);",
+									"});",
+									"",
+									"pm.test(\"catPussy - объект (через через an) Падение\", function () {",
+									"    pm.expect(catPussy).to.be.an(\"number\");",
+									"});",
+									"",
+									"pm.test(\"catPussy - тип cat (через через an) Падение\", function () {",
+									"    pm.expect(catPussy).to.be.an(\"cat\");",
+									"});",
+									"",
+									"pm.test(\"catPussy - создан конструктором Cat Успех\", function () {",
+									"    pm.expect(catPussy).to.be.an.instanceof(Cat);",
+									"});",
+									"",
+									"pm.test(\"catPussy - создан конструктором Cat Падение\", function () {",
+									"    pm.expect(catPussy).to.be.an.instanceof(String);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"test_cu_11@mail.com\"\r\n} \r\n"
+						},
+						"url": {
+							"raw": "postman-echo.com/get",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 18 DADATA Поиск заданной фамилии",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"В заголовке ответа представлен Content-Type и его значение application/json\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\").toUpperCase(), \"Тип содержимого - application/json\").to.include(\"json\".toUpperCase());\r",
+									"});\r",
+									"\r",
+									"let jsonData = pm.response.json(); // распарсили ответ\r",
+									"let SearchName = \"Малахов\"; // Что ищем\r",
+									"let resultArr = jsonData.suggestions.filter(item => item.data.surname === SearchName); // у массива suggestions вызываем метод filter\r",
+									"                                                                                // и помещаем в результирующий массив resultArr\r",
+									"                                                                                // все элементы, у которых .data.surnamee равно искомой \r",
+									"                                                                                // строке \r",
+									"                                                                                // Если функция из filter возвращает true, то \r",
+									"                                                                                // элемент помещается в результирующий массив \r",
+									"                                                                                // resultArr\r",
+									"\r",
+									"console.clear();\r",
+									"console.log(resultArr);\r",
+									"\r",
+									"pm.test(\"Искомая фамилия (Малахов) найдена Успех\", function () {\r",
+									"   pm.expect(resultArr.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Искомая фамилия (Малахов) найдена Падение\", function () {\r",
+									"   pm.expect(resultArr).to.be.empty;\r",
+									"});\r",
+									"\r",
+									"SearchName = \"Малахидзе\";\r",
+									"resultArr = jsonData.suggestions.filter(item => item.data.surname === SearchName);\r",
+									"pm.test(\"Искомая фамилия (Малахов) найдена Падение\", function () {\r",
+									"   pm.expect(resultArr.length).to.be.above(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{DADATA_AUTH_VALUE}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{DADATA_AUTH_KEY}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token 4814112383674f420d216d7ad6e9702f1852dd41"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\": \"Андрей Мал\"\r\n}"
+						},
+						"url": {
+							"raw": "{{DADATA_URL}}/fio",
+							"host": [
+								"{{DADATA_URL}}"
+							],
+							"path": [
+								"fio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 22 DADATA Поиск заданной фамилии XML",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = xml2Json(responseBody).SuggestResponse; //Декодировали xml в json и учли доаолнительный элемент после декодирования - SuggestResponse\r",
+									"\r",
+									"pm.test(\"В заголовке ответа представлен Content-Type и его значение application/xml\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\").toUpperCase(), \"Тип содержимого - application/xml\").to.include(\"xml\".toUpperCase());\r",
+									"});\r",
+									"\r",
+									"let SearchName = \"Малахов\"; // Что ищем\r",
+									"let resultArr = jsonData.suggestions.filter(item => item.data.surname === SearchName); // у массива suggestions вызываем метод filter\r",
+									"                                                                                // и помещаем в результирующий массив resultArr\r",
+									"                                                                                // все элементы, у которых .data.surnamee равно искомой \r",
+									"                                                                                // строке \r",
+									"                                                                                // Если функция из filter возвращает true, то \r",
+									"                                                                                // элемент помещается в результирующий массив \r",
+									"                                                                                // resultArr\r",
+									"\r",
+									"console.clear();\r",
+									"console.log(resultArr);\r",
+									"\r",
+									"pm.test(\"Искомая фамилия (Малахов) найдена Успех\", function () {\r",
+									"   pm.expect(resultArr.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Искомая фамилия (Малахов) найдена Падение\", function () {\r",
+									"   pm.expect(resultArr).to.be.empty;\r",
+									"});\r",
+									"\r",
+									"SearchName = \"Малахидзе\";\r",
+									"resultArr = jsonData.suggestions.filter(item => item.data.surname === SearchName);\r",
+									"pm.test(\"Искомая фамилия (Малахов) найдена Падение\", function () {\r",
+									"   pm.expect(resultArr.length).to.be.above(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{DADATA_AUTH_VALUE}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{DADATA_AUTH_KEY}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token 4814112383674f420d216d7ad6e9702f1852dd41"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<req>\r\n    <query>Андрей Мал</query>\r\n</req>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DADATA_URL}}/fio",
+							"host": [
+								"{{DADATA_URL}}"
+							],
+							"path": [
+								"fio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 23 JIRA getIssue Тестирование заголовков и cookie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"В заголовке ответа представлен Content-Type и его значение содержит charset=UTF-8\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\").toUpperCase(), \"Content-Type содержит charset=UTF-8\").to.include(\"charset=UTF-8\".toUpperCase());\r",
+									"});\r",
+									"\r",
+									"pm.test(\"В заголовке ответа представлен Server и его значение содержит AtlassianEdge\", function () {\r",
+									"    pm.response.to.have.header(\"Server\");\r",
+									"    pm.expect(pm.response.headers.get(\"Server\").toUpperCase(), \"Server содержит AtlassianEdge\").to.include(\"AtlassianEdge\".toUpperCase());\r",
+									"});\r",
+									"\r",
+									"console.log(pm.cookies);\r",
+									"\r",
+									"let ourCookies = pm.cookies.find(element => element.name === \"atlassian.xsrf.token\"); // В массиве cookies ищем элемент с именем atlassian.xsrf.token\r",
+									"\r",
+									"pm.test(\"В ответе присутствует cookies с именем atlassian.xsrf.token и его значение равно ...\", function () {\r",
+									"    pm.expect(pm.cookies.get(\"atlassian.xsrf.token\")).to.eql(\"BR84-VGGI-5LO6-JDEE_86569c7df2807d6177d8402bd2458d1720697efe_lin\");// этот cookies на сессию, меняется от сессии к сессии (как основной ?)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"В ответе присутствует cookies с именем atlassian.xsrf.token Вариант №1 и его значение равно ...\", function () {\r",
+									"    pm.expect(!ourCookies ? \"\" : ourCookies.name, \"Cookies с именем atlassian.xsrf.token существует\").to.eql(\"atlassian.xsrf.token\");\r",
+									"    pm.expect(!ourCookies ? \"\" : ourCookies.value, \"Значение Cookies равно ...\").to.eql(\"BR84-VGGI-5LO6-JDEE_86569c7df2807d6177d8402bd2458d1720697efe_lin\"); // этот cookies на сессию, меняется от сессии к сессии\r",
+									"});\r",
+									"\r",
+									"pm.test(\"В ответе присутствует cookies с именем atlassian.xsrf.token Вариант №2\", function () {\r",
+									"    pm.expect(pm.cookies.indexOf(\"atlassian.xsrf.token\")).to.above(-1); // если cookies таким именем есть, его индекс будет >=0, если нет будет равен -1. Не путать с методом массива indexOf(), это одноименный метод pm.cookies!!!\r",
+									"});\r",
+									"\r",
+									"pm.test(\"В ответе присутствует cookies с именем atlassian.xsrf.token Вариант №3\", function () {\r",
+									"    pm.expect(pm.cookies.has(\"atlassian.xsrf.token\")).to.be.true;\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{ALT_PSW}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{ATL_USERNAME}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{JIRA_URL}}/issue/:issueIdOrKey",
+							"host": [
+								"{{JIRA_URL}}"
+							],
+							"path": [
+								"issue",
+								":issueIdOrKey"
+							],
+							"variable": [
+								{
+									"key": "issueIdOrKey",
+									"value": "TV-4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

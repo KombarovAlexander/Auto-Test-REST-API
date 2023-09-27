@@ -1,0 +1,765 @@
+{
+	"info": {
+		"_postman_id": "31ec6bc6-26e8-41ed-9fb5-c83c072b187d",
+		"name": "Урок 04 Ответ сервера Базовые тесты",
+		"description": "## **Коллекция ДЗ Урок 4.** Ответ сервера. Базовые тесты\n\n#### Задание 10.\n\nПротестировать следующее ASCII-изображение:\n\n```\n(\\__/)\n(='.'=)\nE[:]|||||[:]З\n(\")_(\")\n\n ```\n\n##### Запрос задания:\n\n- **POST ДЗ 10 Тест ASCII-графики**\n    \n\n#### Задание 11.\n\n**JIRA**, метод _**getIssue**_. Обратиться к задаче _**TV-4**_ и убедиться, что в ответе вернулись данные именно по ней.\n\n##### Запрос задания:\n\n- **GET ДЗ 11 JIRA getIssue Это точно запрошенная задача**\n    \n\n#### Задание 12.\n\n**JIRA**, метод **addComment**. Для уже существующей задачи создать комментарий и убедиться, что он действительно создан.\n\n##### Запрос задания:\n\n- **POST ДЗ 12 JIRA addComment Удостовериться в добавлении комментария к задаче**\n    \n\n#### Задание 13.\n\n**USERS**, метод _**getUserFull**_. Для любого пользователя **USERS**, у которого есть компания, проверить _**name**_ компании (любое, если их несколько). Проверку провести 2 способами:\n\n1. Любым удобным вам способом\n2. С помощью _**nested.to.include()**_\n    \n\n##### Запрос задания:\n\n- **POST ДЗ 13 USER getUserFull Проверяем name компании в ответе**\n    \n\n#### Задание 14.\n\n**USERS**, метод _**getUserFull**_. Для любого пользователя **USERS** проверить, что массивы _**tasks**_ и _**companys**_ возвращаются в ответе сервера всегда, даже если они пустые.\n\n##### Запрос задания:\n\n- **POST ДЗ 14 USER getUserFull Массивы возвращаются всегда даже пустые**\n    \n\n#### Задание 15.\n\nИсправить в предложенных спикером тестах ошибки.\n\n##### Запрос задания:\n\n- **Папка ДЗ 15 Исправить ошибки в предложенных тестах**\n    \n\n##### Примечание:\n\n1. Запросы к ресурсу **JIRA** требуют авторизации. Параметры авторизации хранятся и заполняются в глобальных переменных _**ATL_USERNAME**_ и _**ALT_PSW**_, метод авторизации в запросах - **Basic Auth**.\n2. Запросы **ДЗ 13** и **ДЗ 14** требуют предварительного запуска коллекции **Подготовка данных для запросов к ресурсу USERS**.\n3. Запрос **ДЗ 12 JIRA addComment Удостовериться в добавлении комментария к задаче** требует указания **ID** существующей задачи, к которой мы будем создавать комментарий. **ID** задачи передается в парметре запросов _**issueID**_. Значение этого параметра заполняется в переменной коллекции **issueID**.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23386398",
+		"_collection_link": "https://lively-capsule-55441.postman.co/workspace/%25D0%2590%25D0%25B2%25D1%2582%25D0%25BE%25D0%25BC%25D0%25B0%25D1%2582%25D0%25B8%25D0%25B7%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D1%2582%25D0%25B5%25D1%2581%25D1%2582%25D0%25BE%25D0%25B2-%25D0%25B4%25D0%25BB%25D1%258F-REST-A~f0af8592-a4dc-4fe3-aed5-135832153c62/collection/23386398-31ec6bc6-26e8-41ed-9fb5-c83c072b187d?action=share&source=collection_link&creator=23386398"
+	},
+	"item": [
+		{
+			"name": "ДЗ",
+			"item": [
+				{
+					"name": "ДЗ 15 Исправить ошибки в предложенных тестах",
+					"item": [
+						{
+							"name": "1. why_block",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json();",
+											"",
+											"console.clear();",
+											"console.log(jsonData.results[0]);",
+											"",
+											"pm.test(\"Блок why_block показывает, по чему искали. Пояснение: to.deep.eql требует точного совпадения, поэтому к why_block необходимо добавить указание индекса элемента массива [0]. Это видно при анализе тела ответа, или при выводе в консоль console.log(jsonData.results[0])\", function () {",
+											"    pm.expect(jsonData.results[0].why_block[0]).to.deep.eql({",
+											"                    \"field\": \"name\",",
+											"                    \"value\": \"Ромашка\"",
+											"                });",
+											"});",
+											"",
+											"pm.test(\"Блок why_block показывает, по чему искали. Пояснение: to.deep.eql требует точного совпадения, поэтому запрос внутри метода .eql необходимо заключить в квадратные скобки, поскольку why_block - массив: .eql([{...}]). Это видно при анализе тела ответа, или при выводе в консоль console.log(jsonData.results[0])\", function () {",
+											"    pm.expect(jsonData.results[0].why_block).to.deep.eql([{",
+											"                    \"field\": \"name\",",
+											"                    \"value\": \"Ромашка\"",
+											"                }]);",
+											"});",
+											"",
+											"pm.test(\"Блок why_block показывает, по чему искали. Пояснение: to.deep.eql требует точного совпадения, поэтому, как один из вариантов, можно заменить .to.deep.eql на .to.deep.include)\", function () {",
+											"    pm.expect(jsonData.results[0].why_block).to.deep.include({",
+											"                    \"field\": \"name\",",
+											"                    \"value\": \"Ромашка\"",
+											"                });",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "query",
+											"value": "Ромашка",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2. Красавчик - алкоголик!",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json();",
+											"",
+											"console.clear();",
+											"console.log(jsonData.results[0].companies);",
+											"",
+											"pm.test(\"Работает в алкоголиках и тунеяндцах.   Пояснение: jsonData.results[0].companies содержит дочерние элементы, следовательно, необходимо заменить .to.include на .to.deep.include; это видно при анализе тела ответа, или при выводе в консоль console.log(jsonData.results[0].companies)\", function () {",
+											"    pm.expect(jsonData.results[0].companies).to.deep.include({",
+											"                    \"name\": \"Алкоголики и тунеядцы\",",
+											"                    \"id_company\": 15",
+											"                });",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "query",
+											"value": "test_cu_11@mail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/magicsearch",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"magicsearch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. nested",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = pm.response.json();",
+											"console.clear();",
+											"console.log(jsonData.fields.issuelinks[0].outwardIssue);",
+											"",
+											"pm.test(\"Тест nested Пояснение: ключ summary находится внутри ключа 'fields', поэтому в строке fields.issuelinks[0].outwardIssue.summary перед summary необходимо вставить fields: fields.issuelinks[0].outwardIssue.fields.summary. Это видно при анализе тела ответа, либо в консоле при выводе в нее console.log(jsonData.fields.issuelinks[0].outwardIssue)\", function () {  ",
+											"    pm.expect(jsonData).to.nested.include({'fields.issuelinks[0].outwardIssue.fields.summary': 'Новый баг'});",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{ALT_PSW}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{ATL_USERNAME}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{JIRA_URL}}/issue/:issueIdOrKey",
+									"host": [
+										"{{JIRA_URL}}"
+									],
+									"path": [
+										"issue",
+										":issueIdOrKey"
+									],
+									"variable": [
+										{
+											"key": "issueIdOrKey",
+											"value": "TV-4"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ДЗ 10 Тест ASCII-графики",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.clear();",
+									"let textPict = \"\\n\\",
+									"\\(\\\\__/\\)\\n\\",
+									"\\(=\\'.\\'=\\)\\n\\",
+									"E[:]|||||[:]З\\n\\",
+									"\\(\\\"\\)_\\(\\\"\\)\";",
+									"",
+									"console.log(textPict);",
+									"",
+									"pm.test(\"Проверка текста-картинки целиком, как есть\", function () {",
+									"    pm.expect(textPict).to.eql(\"\\n\\",
+									"\\(\\\\__/\\)\\n\\",
+									"\\(=\\'.\\'=\\)\\n\\",
+									"E[:]|||||[:]З\\n\\",
+									"\\(\\\"\\)_\\(\\\"\\)\");",
+									"});",
+									"",
+									"pm.test(\"Проверка текста-картинки целиком в одну строку\", function () {",
+									"    pm.expect(textPict).to.include(\"\\n\\(\\\\__/\\)\\n\\(=\\'.\\'=\\)\\n\\E[:]|||||[:]З\\n\\(\\\"\\)_\\(\\\"\\)\");",
+									"});",
+									"",
+									"pm.test(\"Проверка текста-картинки первой строки\", function () {",
+									"    pm.expect(textPict).to.include(\"\\(\\\\__/\\)\\n\");",
+									"});",
+									"",
+									"pm.test(\"Проверка текста-картинки второй строки\", function () {",
+									"    pm.expect(textPict).to.include(\"\\(=\\'.\\'=\\)\\n\");",
+									"});",
+									"",
+									"pm.test(\"Проверка текста-картинки первых двух строк (цепочка)\", function () {",
+									"    pm.expect(textPict).to.include(\"\\(\\\\__/\\)\\n\").and.include(\"\\(=\\'.\\'=\\)\\n\");",
+									"});",
+									"",
+									"pm.test(\"Проверка текста-картинки первых двух строк одной строкой\", function () {",
+									"    pm.expect(textPict).to.include(\"\\(\\\\__/\\)\\n\\(=\\'.\\'=\\)\\n\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test_demo_1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Демо 1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "postman-echo.com/get",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 11 JIRA getIssue Это точно запрошенная задача",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"console.clear();\r",
+									"pm.test(\"Проверяем что возвращенная задача соответствует запрошенной. Успех\", function () {\r",
+									"    pm.expect(jsonData.key).to.eql(\"TV-4\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Проверяем что возвращенная задача соответствует запрошенной. Падение\", function () {\r",
+									"    pm.expect(jsonData.key).to.eql(\"TV-7\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{ALT_PSW}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{ATL_USERNAME}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{JIRA_URL}}/issue/:issueIdOrKey",
+							"host": [
+								"{{JIRA_URL}}"
+							],
+							"path": [
+								"issue",
+								":issueIdOrKey"
+							],
+							"variable": [
+								{
+									"key": "issueIdOrKey",
+									"value": "TV-4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 12 JIRA addComment Удостовериться в добавлении комментария к задаче",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"let requestParams = JSON.parse(request.data);\r",
+									"\r",
+									"console.clear();\r",
+									"console.log(pm.response.status);\r",
+									"\r",
+									"// 1. Статус 201 и Content-Type в заголовке\r",
+									"pm.test(\"Комментарий к задаче добавлен [Код: 201]\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Комментарий к задаче добавлен [Код: от 200 до 300] вариант для примера\", () => {\r",
+									"    let codeInRange = (200 <= pm.response.code) && (pm.response.code < 300);\r",
+									"    pm.expect(codeInRange).to.eql(true);\r",
+									"});\r",
+									"pm.test(\"Комментарий к задаче добавлен [Статус: Created]\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"pm.test(\"В заголовке ответа представлен Content-Type и его значение application/json\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\"), \"Тип содержимого - application/json\").match(/^application\\/json/i);\r",
+									"});    \r",
+									"// 2. Тело ответа не пустое\r",
+									"pm.test(\"Тело ответа не пустое\", function () {\r",
+									"    pm.expect(jsonData).to.be.an(\"object\").that.has.not.be.empty;\r",
+									"});\r",
+									"// 3. Ссылка на коммент не пустая\r",
+									"pm.test(\"Ссылка на комментарий существует и она не пустая\", function () {\r",
+									"    pm.expect(jsonData, \"Ссылка на комментарий существует\").to.have.property(\"self\");\r",
+									"    pm.expect(jsonData.self, \"Ссылка на комментарий не пустая\").to.have.lengthOf.above(0);\r",
+									"});\r",
+									"// 4. accountID и e-mail не пустые\r",
+									"console.log(jsonData.author);\r",
+									"pm.test(\"Поля accountID и e-mail не пустые и существуют\", function () {\r",
+									"    pm.expect(jsonData.author, \"accountID существует\").to.have.property(\"accountId\");\r",
+									"    pm.expect(jsonData.author.accountId, \"accountID не пустой\").to.have.lengthOf.above(0);\r",
+									"    pm.expect(jsonData.author, \"e-mail существует\").to.have.property(\"emailAddress\");\r",
+									"    pm.expect(jsonData.author.emailAddress, \"e-mail не пустой\").to.have.lengthOf.above(0);\r",
+									"});\r",
+									"// 5. displayName существует и не пустое\r",
+									"pm.test(\"Поле displayName существует и не пустое\", function () {\r",
+									"    pm.expect(jsonData.author, \"displayName существует\").to.have.property(\"displayName\");\r",
+									"    pm.expect(jsonData.author.displayName, \"displayName не пустой\").to.have.lengthOf.above(0);\r",
+									"});\r",
+									"// 6. active равно true\r",
+									"pm.test(\"Поле active существует и равно true\", function () {\r",
+									"    pm.expect(jsonData.author, \"active существует\").to.have.property(\"active\");\r",
+									"    pm.expect(jsonData.author.active, \"active равно true\").to.be.true;\r",
+									"});\r",
+									"// 7. body не пустое\r",
+									"pm.test(\"Поле body не пустое\", function () {\r",
+									"    pm.expect(jsonData.body).to.be.an(\"object\").that.has.not.be.empty;\r",
+									"});\r",
+									"// 8. content не пустой\r",
+									"pm.test(\"Поле content не пустое\", function () {\r",
+									"    pm.expect(jsonData.body.content[0].content).to.be.an(\"array\").that.has.to.have.lengthOf.above(0);\r",
+									"});\r",
+									"// 9. Текст комментария из ответа совпадает с текстом комментария из запроса\r",
+									"pm.test(\"Текст комментария из ответа равен тексту комментария из запроса\", function () { \r",
+									"    pm.expect(jsonData.body.content[0].content[0].text).to.eql(requestParams.body.content[0].content[0].text); \r",
+									"});\r",
+									"//10. Текст комментария из ответа совпадает с текстом комментария из запроса (с приведением текста к заглавным буквам)\r",
+									"pm.test(\"Текст комментария из ответа равен тексту комментария из запроса (с приведением текста к заглавным буквам)\", function () { \r",
+									"    pm.expect(jsonData.body.content[0].content[0].text.toUpperCase()).to.eql(requestParams.body.content[0].content[0].text.toUpperCase()); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{ALT_PSW}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{ATL_USERNAME}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"body\": {\r\n    \"type\": \"doc\",\r\n    \"version\": 1,\r\n    \"content\": [\r\n      {\r\n        \"type\": \"paragraph\",\r\n        \"content\": [\r\n          {\r\n            \"text\": \"Комментарий №1 к задаче TEST-18676\",\r\n            \"type\": \"text\"\r\n          }\r\n        ]\r\n      }\r\n    ]\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{JIRA_URL}}/issue/:issueID/comment",
+							"host": [
+								"{{JIRA_URL}}"
+							],
+							"path": [
+								"issue",
+								":issueID",
+								"comment"
+							],
+							"variable": [
+								{
+									"key": "issueID",
+									"value": "{{issueID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 13 USER getUserFull Проверяем name компании в ответе",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"\r",
+									"console.clear();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Имя компании равно... Успех\", function () {\r",
+									"    pm.expect(jsonData.companys[jsonData.companys.length-1]).to.deep.include({\r",
+									"                \"name\": \"Цирк и кони\"\r",
+									"        });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Имя компании равно... Падение\", function () {\r",
+									"    pm.expect(jsonData.companys[jsonData.companys.length-1]).to.deep.include({\r",
+									"                \"name\": \"Цирк и ко\"\r",
+									"        });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Имя компании равно... (через nested) Успех\", function () {\r",
+									"    pm.expect(jsonData).nested.to.include(JSON.parse(`{\"companys[${jsonData.companys.length-1}].name\": \"Цирк и кони\"}`));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Имя компании равно... (через nested) Падение\", function () {\r",
+									"    pm.expect(jsonData).nested.to.include(JSON.parse(`{\"companys[${jsonData.companys.length-1}].name\": \"Цирк и ко\"}`));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"sidorov@gmail.com\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/getuserfull",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"getuserfull"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 14 USER getUserFull Массивы возвращаются всегда даже пустые Успешно",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"console.clear();\r",
+									"console.log(jsonData.tasks);\r",
+									"\r",
+									"pm.test(\"В ответе есть свойство tasks и его тип - массив\", function () {\r",
+									"    pm.expect(jsonData).to.have.property('tasks').that.is.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство tasks (массив) - пустой, вариант №1, через empty\", function () {\r",
+									"    pm.expect(jsonData.tasks).to.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство tasks (массив) - пустой, вариант №2, через .to.eql(0)\", function () {\r",
+									"    pm.expect(jsonData.tasks.length).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство tasks (массив) - пустой, вариант №3, через .to.eql([])\", function () {\r",
+									"    pm.expect(jsonData.tasks).to.eql([]);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"В ответе есть свойство companys и его тип - массив\", function () {\r",
+									"    pm.expect(jsonData).to.have.property('companys').that.is.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство companys (массив) - пустой, вариант №1, через empty\", function () {\r",
+									"    pm.expect(jsonData.companys).to.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство companys (массив) - пустой, вариант №2, через .to.eql(0)\", function () {\r",
+									"    pm.expect(jsonData.companys.length).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство companys (массив) - пустой, вариант №3, через .to.eql([])\", function () {\r",
+									"    pm.expect(jsonData.companys).to.eql([]);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"gendir@romashka.ru\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/getuserfull",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"getuserfull"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 14 USER getUserFull Массивы возвращаются всегда даже пустые Падение",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"console.clear();\r",
+									"console.log(jsonData.tasks);\r",
+									"\r",
+									"pm.test(\"В ответе есть свойство tasks и его тип - массив\", function () {\r",
+									"    pm.expect(jsonData).to.have.property('tasks').that.is.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство tasks (массив) - пустой, вариант №1, через empty\", function () {\r",
+									"    pm.expect(jsonData.tasks).to.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство tasks (массив) - пустой, вариант №2, через .to.eql(0)\", function () {\r",
+									"    pm.expect(jsonData.tasks.length).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство tasks (массив) - пустой, вариант №3, через .to.eql([])\", function () {\r",
+									"    pm.expect(jsonData.tasks).to.eql([]);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"В ответе есть свойство companys и его тип - массив\", function () {\r",
+									"    pm.expect(jsonData).to.have.property('companys').that.is.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство companys (массив) - пустой, вариант №1, через empty\", function () {\r",
+									"    pm.expect(jsonData.companys).to.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство companys (массив) - пустой, вариант №2, через .to.eql(0)\", function () {\r",
+									"    pm.expect(jsonData.companys.length).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Свойство companys (массив) - пустой, вариант №3, через .to.eql([])\", function () {\r",
+									"    pm.expect(jsonData.companys).to.eql([]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"gendir@romashka.r\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/getuserfull",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"getuserfull"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "issueID",
+			"value": "TEST-20256",
+			"type": "string"
+		}
+	]
+}

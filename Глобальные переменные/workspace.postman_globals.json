@@ -1,0 +1,57 @@
+{
+	"id": "9fb90092-b108-42c0-8458-a80c1bdac6d6",
+	"values": [
+		{
+			"key": "ATL_USERNAME",
+			"value": "mail.for.user",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "ALT_PSW",
+			"value": "token.for.user",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "USERS_URL",
+			"value": "http://users.bugred.ru/tasks/rest",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "JIRA_URL",
+			"value": "https://testbase.atlassian.net/rest/api/3",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "DADATA_URL",
+			"value": "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "DADATA_AUTH_KEY",
+			"value": "Authorization",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "DADATA_AUTH_VALUE",
+			"value": "token.for.user",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "SHOP_URL",
+			"value": "http://shop.bugred.ru/api",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2023-09-27T08:32:28.516Z",
+	"_postman_exported_using": "Postman/10.18.9"
+}

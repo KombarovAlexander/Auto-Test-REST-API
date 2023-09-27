@@ -1,0 +1,994 @@
+{
+	"info": {
+		"_postman_id": "e0173430-48de-4a5f-a603-8c4e1b643179",
+		"name": "Урок 07 Условия и циклы",
+		"description": "## **Коллекция ДЗ Урок 7.** Условия и циклы\n\n#### Задание 30.\n\n**USERS**, метод _**getUserFull**_. Для указанного пользователя проверить в ответе сервера наличие полей _**companys**_ и _**tasks**_, а также правильность их типов. Если указанные поля в ответе существуют, проверить у их **первых** элементов наличие полей _**name**_ и _**id_company**_ и _**name**_ и _**id_task**_ соответственно, а также правильность их типов.\n\nВ случае отсутствия в ответе сервера полей _**companys**_ и _**tasks**_, проверить ответ сервера на наличие сообщения о том, что запрошенный пользователь не найден.\n\n##### Запрос задания:\n\n- **POST ДЗ 30 USER getUserFull Есть ли в ответе компании и задачи**\n    \n\n#### Задание 31.\n\n**DADATA**, поиск по фамилии. Отправить ресурсу **DADATA** запрос, тело которого имеет вид:\n\n``` json\n{\n  \"query\": \"А\",\n  \"gender\": \"MALE\",\n  \"parts\": [\"NAME\"]\n}\n\n ```\n\nНаписать автотесты, проверяющие, что:\n\n1. В ответе сервера только мужчины.\n2. В ответе сервера только имена.\n    \n\nПеребор элементов ответа сервера реализовать в двух вариантах: циклом _**for**_ и методом массива _**forEach()**_.\n\n##### Запрос задания:\n\n- **POST ДЗ 31 DADATA Поиск по фамилии В ответе только имена**\n    \n\n#### Задание 32.\n\n**DADATA**, поиск по фамилии. Отправить ресурсу **DADATA** запрос, тело которого имеет вид:\n\n``` json\n{\n  \"query\": \"Ан\"\n}\n\n ```\n\nНаписать автотест, проверяющий, что среди релевантных элементов ответа сервера существует элемент, содержащий имя **Анна**.\n\n##### Запросы задания:\n\n- **POST ДЗ 32 DADATA Поиск по фамилии В ответе есть имя Анна**\n    \n\n#### Задание 33.\n\n**USERS**, метод _**updateUserOneField**_. Методом _**sendRequest()**_ объекта **pm** создать пользователя с рандомными _**name**_ и _**email**_. Методом _**updateUserOneField**_ обновить у этого пользователя поле _**hobby**_. Написать автотест, проверяющий, что это поле действительно обновилось и именно тем значением, которое было указано при создании пользователя.\n\n##### Запросы задания:\n\n- **POST ДЗ 33 USER updateUserOneField Изменяем выбранное поле пользователя sendRequest**\n    \n\n##### Примечание:\n\nДля удобства использования, а также для будущих ДЗ, где такой подход необходим, стандартный метод _**sendRequest()**_ объекта **pm** был \"обернут\" в **Promise**.\n\n#### Задание 34.\n\n**USERS**, метод _**getUserFull**_. Методом _**sendRequest()**_ объекта **pm** создать компанию, аналогичным методом создать пользователя и привязать его к созданной на предыдущем этапе компании. Выполнить на ресурсе **USERS** метод _**getUserFull**_ для созданного ранее пользователя и убедиться, что пользователь связан с только что созданной компанией.\n\n##### Запросы задания:\n\n- **POST ДЗ 34 USER getUserFull Тестируем соответствие компании в ответе sendRequest**\n    \n\n##### Примечание:\n\nПоскольку _**pm.sendRequest()**_ выполняется ассинхронно, а нам необходимо организовать цепочку _**sendRequest()**_ с последовательной передачей данных между ними, стандартный метод _**sendRequest()**_ объекта **pm** был \"обернут\" в **Promise**.\n\n#### Задание 35.\n\n**USERS**, метод _**magicSearch**_. Методом _**magicSearch**_ произвести на ресурсе **USERS** поиск указанного пользователя. Написать автотесты, проверяющие корректность возвращенных для него _**name**_, _**email**_, _**phone**_ и _**birthday**_. Необходимо учесть, что запрос может быть выполнен в двух окружениях: _**тестовом**_ и _**рабочем**_. В _**тестовом**_ окружении мы _**можем создать**_ необходимого нам пользователя, если его там в данный момент нет; в _**рабочем**_ окружении создавать необходимого нам пользователя _**нельзя**_.\n\n##### Примечание:\n\nТекущее окружение указывается в переменной коллекции _**magicSearchEnvURL**_\n\n##### Запрос задания:\n\n- **POST ДЗ 35 USER magicSearch Поиск пользователя с учетом окружения SendRequest**\n    \n\n##### Примечание:\n\n1. Запрос **ДЗ 35-1 USER addAvatar Добавить аватар из файла пользователю** не является частью домашнего задания и выполнен по собственной инициативе. Данный запрос загружает изображение аватара для пользователя, созданного в **ДЗ 35**.\n2. Запросы к ресурсу **DADATA** требуют авторизации. Параметры авторизации хранятся и заполняются в глобальных переменных **DADATA_AUTH_KEY** и **DADATA_AUTH_VALUE**, метод авторизации в запросах - **API Key**.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23386398",
+		"_collection_link": "https://lively-capsule-55441.postman.co/workspace/%25D0%2590%25D0%25B2%25D1%2582%25D0%25BE%25D0%25BC%25D0%25B0%25D1%2582%25D0%25B8%25D0%25B7%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D1%2582%25D0%25B5%25D1%2581%25D1%2582%25D0%25BE%25D0%25B2-%25D0%25B4%25D0%25BB%25D1%258F-REST-A~f0af8592-a4dc-4fe3-aed5-135832153c62/collection/23386398-e0173430-48de-4a5f-a603-8c4e1b643179?action=share&source=collection_link&creator=23386398"
+	},
+	"item": [
+		{
+			"name": "ДЗ",
+			"item": [
+				{
+					"name": "Демонстрация доступности функции test описаной на уровне коллекции в Pre-request и Tests",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log('Вызов функции test в Tests: ', test(1, 3));\r",
+									"\r",
+									"let testJSON = {\r",
+									"    \"response\": [\r",
+									"        {\r",
+									"            \"number\": 123\r",
+									"        },\r",
+									"        {\r",
+									"            \"number\": 321,\r",
+									"            \"errore\": {\r",
+									"                \"code\": \"aaa\"\r",
+									"            }\r",
+									"        },\r",
+									"        {\r",
+									"            \"number\": 333,\r",
+									"            \"errore\": {\r",
+									"                \"code\": \"bbb\"\r",
+									"            }\r",
+									"        }\r",
+									"    ]\r",
+									"};\r",
+									"\r",
+									"let abcJSON = [\r",
+									"    {\r",
+									"        \"receiverRoleName\": \"abdc\",\r",
+									"        \"prop_1\": \"7676c\",\r",
+									"        \"prop_2\": \"trutruc\",\r",
+									"        \"prop_3\": \"tuguh\",\r",
+									"        \"prop_4\": \"556\",\r",
+									"        \"prop_5\": \"rygfd\"\r",
+									"    },\r",
+									"    {\r",
+									"        \"receiverRoleName\": \"77777\",\r",
+									"        \"prop_1\": \"7676c\",\r",
+									"        \"prop_2\": \"trutruc\",\r",
+									"        \"prop_3\": \"tuguh\",\r",
+									"        \"prop_4\": \"556\",\r",
+									"        \"prop_5\": \"rygfd\"\r",
+									"    },\r",
+									"];\r",
+									"\r",
+									"let myarr = abcJSON.filter(el => el.hasOwnProperty(\"receiverRoleName\"));\r",
+									"\r",
+									"pm.test(\"В ответе есть объеты, содержащие свойство 'receiverRoleName'\", function () {\r",
+									"        pm.expect(myarr.length).to.above(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"В ответе есть объеты, значение свойства 'receiverRoleName' которых равно 77777\", function () {\r",
+									"        pm.expect(myarr.filter(el => el.receiverRoleName === \"77777\")?.length).to.above(0);\r",
+									"});\r",
+									"\r",
+									"let find = testJSON.response.filter(el => (el.errore?.code ?? \"777\") === \"aaa\" || (el.errore?.code ?? \"777\") === \"bbb\");\r",
+									"console.log(find);\r",
+									"\r",
+									"\r",
+									"\r",
+									"let resJSON = [\r",
+									"      {\r",
+									"        \"id\": 924,\r",
+									"        \"event_id\": 169,\r",
+									"        \"participantable\": {\r",
+									"            \"id\": 144,\r",
+									"             },\r",
+									"        \"participantable_type\": \"User\",\r",
+									"        \"role\": \"expert\"\r",
+									"     },\r",
+									"    {\r",
+									"        \"id\": 926,\r",
+									"        \"event_id\": 169,\r",
+									"        \"participantable\": {\r",
+									"            \"id\": 187,\r",
+									"           },\r",
+									"        \"participantable_type\": \"User\",\r",
+									"        \"role\": \"expert\"\r",
+									"               \r",
+									"    }\r",
+									"];\r",
+									"\r",
+									"let jsonArr = resJSON.filter(el => el.hasOwnProperty(\"role\"))?.filter(el => el.role === 'expert')?.map(el => el.id);\r",
+									"\r",
+									"console.log(jsonArr);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log('Вызов функции test в Pre-request: ', test(5, 2));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://postman-echo.com/post",
+							"protocol": "http",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 30 USER getUserFull Есть ли в ответе компании и задачи",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var requestBody = JSON.parse(request.data);\r",
+									"console.clear();\r",
+									"\r",
+									"if (!jsonData.message) {\r",
+									"    pm.test(\"В ответе есть свойство tasks и его тип - массив\", function () {\r",
+									"        pm.expect(jsonData).to.have.property('tasks').that.is.an('array');\r",
+									"    });\r",
+									"    if (jsonData.tasks.length > 0) {\r",
+									"        pm.test(\"У нулевого элемента массива задач есть свойство name и его тип строка\", function () {\r",
+									"            pm.expect(jsonData.tasks[0]).to.have.property('name').that.is.an('string');\r",
+									"        });\r",
+									"        pm.test(\"У нулевого элемента массива задач есть свойство id_task и его тип число\", function () {\r",
+									"            pm.expect(jsonData.tasks[0]).to.have.property('id_task').that.is.an('number');\r",
+									"        });\r",
+									"    } else {\r",
+									"        pm.test(\"Свойство tasks (массив) - пустой\", function () {\r",
+									"            pm.expect(jsonData.tasks.length).to.eql(0);\r",
+									"        });\r",
+									"    }\r",
+									"\r",
+									"    pm.test(\"В ответе есть свойство companys и его тип - массив\", function () {\r",
+									"        pm.expect(jsonData).to.have.property('companys').that.is.an('array');\r",
+									"    });\r",
+									"\r",
+									"    if (jsonData.companys.length > 0) {\r",
+									"        pm.test(\"У нулевого элемента массива компаний есть свойство name и его тип строка\", function () {\r",
+									"            pm.expect(jsonData.companys[0]).to.have.property('name').that.is.an('string');\r",
+									"        });\r",
+									"        pm.test(\"У нулевого элемента массива компаний есть свойство id_company и его тип число\", function () {\r",
+									"            pm.expect(jsonData.companys[0]).to.have.property('id_company').that.is.an('number');\r",
+									"        });\r",
+									"    } else {\r",
+									"        pm.test(\"Свойство companys (массив) - пустой\", function () {\r",
+									"            pm.expect(jsonData.companys.length).to.eql(0);\r",
+									"        });\r",
+									"    }\r",
+									"} else {\r",
+									"   pm.test(`Сообщение об ошибке содержит текст: \"Пользователь не найден ${requestBody.email}\"`, function () {\r",
+									"        pm.expect(jsonData.message).to.deep.include(`Пользователь не найден ${requestBody.email}`);\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"stepanov@mail.com\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/getuserfull",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"getuserfull"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 31 DADATA  Поиск по фамилии В ответе только имена",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"for (let i = 0; i < jsonData.suggestions.length; i++) {\r",
+									"    pm.test(`В подсказке №${i} нет фамилии`, function () {\r",
+									"        pm.expect(jsonData.suggestions[i].data.surname).to.be.null;\r",
+									"    });\r",
+									"    pm.test(`В подсказке №${i} есть имя`, function () {\r",
+									"        pm.expect(jsonData.suggestions[i].data.name).to.not.be.null;\r",
+									"    });\r",
+									"    pm.test(`В подсказке №${i} пол мужской`, function () {\r",
+									"        pm.expect(jsonData.suggestions[i].data.gender).to.eql(\"MALE\");\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"jsonData.suggestions.forEach((element, i) => {\r",
+									"   pm.test(`В подсказке №${i} нет фамилии (метод forEach)`, function () {\r",
+									"        pm.expect(element.data.surname).to.be.null;\r",
+									"    });\r",
+									"    pm.test(`В подсказке №${i} есть имя (метод forEach)`, function () {\r",
+									"        pm.expect(element.data.name).to.not.be.null;\r",
+									"    });\r",
+									"    pm.test(`В подсказке №${i} пол мужской (метод forEach)`, function () {\r",
+									"        pm.expect(element.data.gender).to.eql(\"MALE\");\r",
+									"    }); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{DADATA_AUTH_VALUE}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{DADATA_AUTH_KEY}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token 4814112383674f420d216d7ad6e9702f1852dd41",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": \"А\",\r\n    \"gender\": \"MALE\",\r\n    \"parts\": [\"NAME\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DADATA_URL}}/fio",
+							"host": [
+								"{{DADATA_URL}}"
+							],
+							"path": [
+								"fio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 32 DADATA  Поиск по фамилии В ответе есть имя Анна",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"let findName = 'Анна';\r",
+									"let responseFindName = jsonData.suggestions.find(element => element.data.name === findName)?.data.name;\r",
+									"console.log(responseFindName);\r",
+									"\r",
+									"pm.test(\"В подсказке найдена искомая фамилия\", function () {\r",
+									"        pm.expect(responseFindName).to.eql(findName);\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{DADATA_AUTH_VALUE}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{DADATA_AUTH_KEY}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token 4814112383674f420d216d7ad6e9702f1852dd41",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": \"Ан\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DADATA_URL}}/fio",
+							"host": [
+								"{{DADATA_URL}}"
+							],
+							"path": [
+								"fio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 33 USER updateUserOneField Изменяем выбранное поле пользователя sendRequest",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let rndEmail = pm.variables.replaceIn('{{$randomEmail}}').toLowerCase(); // случайный e-mail в нижнем регистре\r",
+									"let rndHobbyValue = pm.variables.replaceIn('{{$randomWord}}'); // случайное слово для названия хобби\r",
+									"\r",
+									"// заполняем тело запроса апдейта хобби для созданного ранее пользователя\r",
+									"pm.request.body.formdata.find(el => el.key === 'email').value = rndEmail; \r",
+									"pm.request.body.formdata.find(el => el.key === 'field').value = 'hobby';\r",
+									"pm.request.body.formdata.find(el => el.key === 'value').value = rndHobbyValue;\r",
+									"\r",
+									"let createUserRequestBody = {}; // тело запроса для создания пользователя\r",
+									"// заполняем тело запроса для создания пользователя\r",
+									"createUserRequestBody.email = rndEmail;\r",
+									"createUserRequestBody.name = pm.variables.replaceIn('{{$randomFirstName}}'); //случайное имя\r",
+									"createUserRequestBody.password = pm.variables.replaceIn('{{$randomInt}}'); // пароль (случайное число)\r",
+									"\r",
+									"// формируем сам запрос для создания пользователся\r",
+									"const createUserRequest = {\r",
+									"  url: 'http://users.bugred.ru/tasks/rest/doregister',\r",
+									"  method: 'POST',\r",
+									"  body: {\r",
+									"    mode: 'raw',\r",
+									"    raw: JSON.stringify(createUserRequestBody)\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"function fnSendRequest(requestParams) { // для отправки запроса создаем промис, чтобы управлять синхронностью, либо ассинхронностью\r",
+									"    return new Promise((resolve, reject) => { // создаем промис\r",
+									"        pm.sendRequest(requestParams, function (error, response) { // отправляем запрос\r",
+									"            if (response.json().type) { // т.к. запрос на этот адрес всегда получает 200, то приходится анализировать тело ответа response.json()\r",
+									"                reject(new Error(response.json().message)); //если в теле ответа есть type, то ошибка,создаем ошибку -> режект с ошибкой\r",
+									"            } else {\r",
+									"                resolve(response.json()); // ошибки нет, резольв с успехом\r",
+									"            }\r",
+									"//            if (error) {reject(error)} else {resolve(response)} // так должно быть со стандартным запросом, возвращающим в случае ошибки error, а в случае успеха - response\r",
+									"        });\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"async function asyncSendRequest(requestParams) {\r",
+									"    try {\r",
+									"        let result = await fnSendRequest(requestParams); // вызываем запрос и ждем пока он выполнится\r",
+									"        console.log(\"ОК. Поьзователь успешно создан \", result);\r",
+									"    }\r",
+									"    catch(err) {\r",
+									"        console.log(err);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"asyncSendRequest(createUserRequest); // стартуем запрос с параметрами createUserRequest\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"let hobbyValue = pm.request.body.formdata.find(el => el.key === 'value').value;\r",
+									"let emailValue = pm.request.body.formdata.find(el => el.key === 'email').value;\r",
+									"//console.log(hobbyValue);\r",
+									"\r",
+									"pm.test(`Поле хобби успешно обновлено у пользователя с e-mail ${emailValue}`, function () {\r",
+									"  pm.expect(jsonData.message).to.include(emailValue).and.include(hobbyValue);\r",
+									"});\r",
+									"\r",
+									"// ПРОВЕРКА СМЕНЫ ХОББИ С ПОДТВЕРЖДЕНИЕМ\r",
+									"\r",
+									"let magicSearchRequestBody = {}; // Тело запроса\r",
+									"let magicSearchResponseBody = {}; // Тело ответа\r",
+									"magicSearchRequestBody.query = emailValue; // заполняем тело запроса для метода magicSearch, т.к. почему-то только в нем возвращается реальное значение свойства \"хобби\"\r",
+									"\r",
+									"const magicSearchRequest = { // Параметры запроса magicSearch\r",
+									"  url: 'http://users.bugred.ru/tasks/rest/magicsearch',\r",
+									"  method: 'GET',\r",
+									"  body: {\r",
+									"    mode: 'raw',\r",
+									"    raw: JSON.stringify(magicSearchRequestBody)\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"function fnSendRequest(requestParams) { // функция, создающая промис для отправки запроса magicSearch\r",
+									"    return new Promise((resolve, reject) => { \r",
+									"        pm.sendRequest(requestParams, function (error, response) { \r",
+									"            if (error) {reject(error)} else {resolve(response)}\r",
+									"        });\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"async function asyncSendRequest(requestParams) { // ассинхронная функция вызывающая промис запроса\r",
+									"    try {\r",
+									"        let result = await fnSendRequest(requestParams); // отправляем запрос\r",
+									"        magicSearchResponseBody = result.json();\r",
+									"        // почему здесь 2 знака ?: 1. поиск может упасть с ошибкой и results может не быть вообще  2. можем не найти пользователя по заданному email и hobby не будет существовать\r",
+									"        let responseFindHobby = magicSearchResponseBody.results?.find(element => element.email === emailValue)?.hobby;\r",
+									"        // если запрос прошел успешно, выполняем тест (именно здесь ! т.к. именно здесь ассинхронный вызов с await, вызов теста в другом месте будет выполняться до завершения запроса !!!)\r",
+									"        pm.test(`Хобби пользователя ${emailValue} успешно обновлено на ${hobbyValue}`, function () {\r",
+									"            pm.expect(responseFindHobby).to.eql(hobbyValue);\r",
+									"        });\r",
+									"\r",
+									"        console.log(\"ОК. Поиск завершился без ошибок \", magicSearchResponseBody);\r",
+									"    }\r",
+									"    catch(err) {\r",
+									"        console.log(err);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"asyncSendRequest(magicSearchRequest); // Стартуем запрос к magicSearch и выполнения теста внутри этого запроса\r",
+									"\r",
+									"console.log(magicSearchResponseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "field",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "value",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/useronefield",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"useronefield"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 34 USER getUserFull Тестируем соответствие компании в ответе sendRequest",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// ФОРМИРУЕМ ПАРАМЕТРЫ ЗАПРОСА ДЛЯ СОЗДАНИЯ ПОЛЬЗОВАТЕЛЯ-ВЛАДЕЛЬЦА КОМПАНИИ\r",
+									"\r",
+									"let rndOwnerEmail = pm.variables.replaceIn('{{$randomEmail}}').toLowerCase(); // случайный e-mail владельца компании в нижнем регистре\r",
+									"\r",
+									"let createUserOwnerRequestBody = {}; // тело запроса для создания пользователя-владельца компании\r",
+									"// заполняем тело запроса для создания пользователя-владельца компании\r",
+									"createUserOwnerRequestBody.email = rndOwnerEmail;\r",
+									"createUserOwnerRequestBody.name = pm.variables.replaceIn('{{$randomFirstName}}'); //случайное имя\r",
+									"createUserOwnerRequestBody.password = pm.variables.replaceIn('{{$randomInt}}'); // пароль (случайное число)\r",
+									"\r",
+									"// формируем сам запрос для создания пользователся\r",
+									"const createUserOwnerRequest = {\r",
+									"  url: 'http://users.bugred.ru/tasks/rest/doregister',\r",
+									"  method: 'POST',\r",
+									"  body: {\r",
+									"    mode: 'raw',\r",
+									"    raw: JSON.stringify(createUserOwnerRequestBody)\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"\r",
+									"// ФОРМИРУЕМ ПАРАМЕТРЫ ЗАПРОСА ДЛЯ СОЗДАНИЯ КОМПАНИИ\r",
+									"\r",
+									"// функция, возвращающая случайное целое значение из диапазона min -> max, требуется нам для выбора типа компании\r",
+									"let rndIntFromTo = (min, max) => (Math.floor(min + Math.random()*(max + 1 - min)));\r",
+									"let companyType = ['ИП', 'ООО', 'ОАО']; // типы компаний\r",
+									"let rndCompanyName = pm.variables.replaceIn('{{$randomWord}}'); // случайное слово для названия компании\r",
+									"let rndCompanyType = companyType[rndIntFromTo(0, 2)]; // случайно выбранное значение из rndCompanyName\r",
+									"let createCompanyRequestBody = {}; // тело запроса для создания компании\r",
+									"let compUsers = [];\r",
+									"compUsers.push(rndOwnerEmail);\r",
+									"\r",
+									"//Заполняем тело запроса для создания компании\r",
+									"createCompanyRequestBody.company_name = rndCompanyName;\r",
+									"createCompanyRequestBody.company_type = rndCompanyType;\r",
+									"createCompanyRequestBody.company_users = compUsers;\r",
+									"createCompanyRequestBody.email_owner = rndOwnerEmail;\r",
+									"\r",
+									"// формируем сам запрос для создания компании\r",
+									"const createCompanyRequest = {\r",
+									"  url: 'http://users.bugred.ru/tasks/rest/createcompany',\r",
+									"  method: 'POST',\r",
+									"  body: {\r",
+									"    mode: 'raw',\r",
+									"    raw: JSON.stringify(createCompanyRequestBody)\r",
+									"  }\r",
+									"};\r",
+									"console.log(createCompanyRequest);\r",
+									"\r",
+									"function fnSendRequest(requestParams) { // для отправки запроса создаем промис, чтобы управлять синхронностью, либо ассинхронностью\r",
+									"    return new Promise((resolve, reject) => { // создаем промис\r",
+									"        pm.sendRequest(requestParams, function (error, response) { // отправляем запрос\r",
+									"            if (response.json().type === 'error') { // т.к. запрос на этот адрес всегда получает 200, то приходится анализировать тело ответа response.json()\r",
+									"                reject(new Error(response.json().message)); //если в теле ответа есть type == 'error', то ошибка, создаем ошибку -> режект с ошибкой\r",
+									"            } else {\r",
+									"                console.log(response);\r",
+									"                resolve(response.json()); // ошибки нет, резольв с успехом\r",
+									"            }\r",
+									"//            if (error) {reject(error)} else {resolve(response)} // так должно быть со стандартным запросом, возвращающим в случае ошибки error, а в случае успеха - response\r",
+									"        });\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"async function asyncSendRequest(userOwner, company) {\r",
+									"    try {\r",
+									"        let resultUserOwner = await fnSendRequest(userOwner); // вызываем запрос создания владельца компании и ждем пока он выполнится\r",
+									"        console.log(\"ОК. Пользователь успешно создан \", resultUserOwner);\r",
+									"\r",
+									"        let resultCompany = await fnSendRequest(company); // вызываем запрос создания компании и ждем пока он выполнится\r",
+									"        console.log(\"ОК. Компания успешно создана \", resultCompany);\r",
+									"        console.log(\"ID созданной компании - \", resultCompany.id_company); \r",
+									"        pm.collectionVariables.set(\"compId34\", JSON.stringify(resultCompany.id_company)); // перекидываем email в переменную колекции\r",
+									"\r",
+									"        // ФОРМИРУЕМ ПАРАМЕТРЫ ЗАПРОСА ДЛЯ СОЗДАНИЯ ПОЛЬЗОВАТЕЛЯ\r",
+									"        // код вставлен именно сюда, т.к. для создания пользователя с привязкой к компании нам надо получить значение id_company из предыдущего запроса\r",
+									"        let rndUserEmail = pm.variables.replaceIn('{{$randomEmail}}').toLowerCase(); // случайный e-mail владельца компании в нижнем регистре\r",
+									"        let companys = [];\r",
+									"        let userTasks = [];\r",
+									"        companys.push(resultCompany.id_company); // закидываем ID компании из предыдущего запроса\r",
+									"        userTasks.push({\r",
+									"            \"title\": `${pm.variables.replaceIn('{{$randomWord}}')}`,\r",
+									"            \"description\": `${pm.variables.replaceIn('{{$randomWord}}')}`\r",
+									"        });\r",
+									"        let createUserRequestBody = {}; // тело запроса для создания пользователя в компании\r",
+									"\r",
+									"        // заполняем тело запроса для создания пользователя в компании\r",
+									"        createUserRequestBody.email = rndUserEmail;\r",
+									"        createUserRequestBody.name = pm.variables.replaceIn('{{$randomFirstName}}'); //случайное имя\r",
+									"        createUserRequestBody.tasks = userTasks;\r",
+									"        createUserRequestBody.companies = companys;\r",
+									"\r",
+									"        // формируем сам запрос для создания пользователя в компании\r",
+									"        const createUserRequest = {\r",
+									"                url: 'http://users.bugred.ru/tasks/rest/createuserwithtasks',\r",
+									"                method: 'POST',\r",
+									"                body: {\r",
+									"                mode: 'raw',\r",
+									"                raw: JSON.stringify(createUserRequestBody)\r",
+									"                }\r",
+									"        };\r",
+									"\r",
+									"        let resultUser = await fnSendRequest(createUserRequest); // вызываем запрос создания пользователя с привязкой к компании и ждем пока он выполнится\r",
+									"        pm.collectionVariables.set(\"usrEmail34\", JSON.stringify(resultUser.email)); // перекидываем email в переменную колекции \r",
+									"        console.log(\"ОК. Пользователь с привязкой к компании успешно создан \", resultUser.email);\r",
+									"\r",
+									"    }\r",
+									"    catch(err) {\r",
+									"        console.log(err);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"asyncSendRequest(createUserOwnerRequest, createCompanyRequest); // стартуем запрос с параметрами createUserRequest\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"let idCompany = JSON.parse(pm.collectionVariables.get(\"compId34\"));\r",
+									"let userEmail = JSON.parse(pm.collectionVariables.get(\"usrEmail34\"));\r",
+									"\r",
+									"let findIdCompany = jsonData?.companys.find(el => el.id_company === idCompany).id_company; // ищем в ответе в массиве компаний компанию с id, равным id, присвоенному нашей компании при создании\r",
+									"\r",
+									"console.log(idCompany);\r",
+									"console.log(userEmail);\r",
+									"console.log(findIdCompany);\r",
+									"\r",
+									"pm.test(`Запрошенный пользователь ${userEmail} соответствует возвращенному`, function () {\r",
+									"        pm.expect(jsonData.email).to.eql(userEmail);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Запрошенный пользователь ${userEmail} привязан к компании с id = ${idCompany}, созданной в предыдущем запросе`, function () {\r",
+									"        pm.expect(findIdCompany).to.eql(idCompany);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": {{usrEmail34}}\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/getuserfull",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"getuserfull"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 35 USER magicSearch Поиск пользователя с учетом окружения SendRequest",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const testEnvURL = \"http://users.bugred.ru\";\r",
+									"let requestURL = pm.collectionVariables.get(\"magicSearchEnvURL\");\r",
+									"if (requestURL === testEnvURL) {\r",
+									"    // формируем запрос для создания пользователя\r",
+									"    const createUserOwnerRequest = {\r",
+									"        url: `${requestURL}/tasks/rest/doregister`,\r",
+									"        method: 'POST',\r",
+									"        body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"                                \"email\": \"gendir@romashka.com\",\r",
+									"                                \"name\": \"Лунатиков Олег Михайлович\",\r",
+									"                                \"password\": \"53\"\r",
+									"                            })\r",
+									"              }\r",
+									"    };\r",
+									"\r",
+									"    // формируем запрос для обновления пользователя\r",
+									"    const updateUserOwnerRequest = {\r",
+									"        url: `${requestURL}/tasks/rest/fullupdateuser`,\r",
+									"        method: 'POST',\r",
+									"        body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"                                \"email\": \"gendir@romashka.com\",\r",
+									"                                \"name\": \"Лунатиков Олег Михайлович\",\r",
+									"                                \"hobby\":\"Стрельба из лука, Настолки\",\r",
+									"                                \"adres\":\"Москва, Казанский вокзал\",\r",
+									"                                \"name1\":\"Лунатиков\",\r",
+									"                                \"surname1\":\"Олег\",\r",
+									"                                \"fathername1\":\"Михайлович\",\r",
+									"                                \"cat\":\"Мурка\",\r",
+									"                                \"dog\":\"Тузик\",\r",
+									"                                \"parrot\":\"Кеша\",\r",
+									"                                \"cavy\":\"Sea shwine\",\r",
+									"                                \"hamster\":\"Хома\",\r",
+									"                                \"squirrel\":\"Белочка\",\r",
+									"                                \"phone\":\"8-906-1112233\",\r",
+									"                                \"inn\":\"123456789012\",\r",
+									"                                \"gender\":\"m\",\r",
+									"                                \"birthday\":\"08.09.1985\",\r",
+									"                                \"date_start\":\"11.11.2011\"\r",
+									"                            })\r",
+									"              }\r",
+									"    };\r",
+									"    \r",
+									"    // формируем запрос для создания компании\r",
+									"    const createCompanyRequest = {\r",
+									"        url: `${requestURL}/tasks/rest/createcompany`,\r",
+									"        method: 'POST',\r",
+									"        body: {\r",
+									"                mode: 'raw',\r",
+									"                raw: JSON.stringify({\r",
+									"                                        \"company_name\": \"Ромашки и лютики\",\r",
+									"                                        \"company_type\": \"ИП\",\r",
+									"                                        \"company_users\": [\"gendir@romashka.com\"],\r",
+									"                                        \"email_owner\": \"gendir@romashka.com\"\r",
+									"                                    })\r",
+									"              }\r",
+									"    };\r",
+									"\r",
+									"    let intValueBetween = (x, min, max) => (x >= min && x <= max) // Проверка целого числа на вхождение в диапазон чисел; видна везде в коллекции\r",
+									"\r",
+									"    // функция с промисом, выполняет pm.sendRequest() и режектит промис в зависимости от полученного кода или возникновения ошибки \r",
+									"    let mySendRequest = (requestParams, minGoodcode = 200, maxGoodCode = 200) => new Promise((resolve, reject) => { \r",
+									"        pm.sendRequest(requestParams, function (error, response) { \r",
+									"            if (error || !intValueBetween(response.code, minGoodcode, maxGoodCode)) {reject(new Error(response.json().message))} else {resolve(response.json())}\r",
+									"        });\r",
+									"    }); \r",
+									"\r",
+									"    async function asyncSendRequest(createUser, createСompany, updateUser) {\r",
+									"        try {\r",
+									"            let resultUserOwner = await mySendRequest(createUser, 200, 299);\r",
+									"            console.log(\"Пользователь: \", resultUserOwner);\r",
+									"            let resultCompany = await mySendRequest(createСompany, 200, 299);\r",
+									"            console.log(\"Компания: \", resultCompany);\r",
+									"            let resultUpdateUser = await mySendRequest(updateUser, 200, 299);\r",
+									"            console.log(\"Обновление поользователя: \", resultUpdateUser);\r",
+									"        }\r",
+									"        catch(err) {\r",
+									"            console.log(err);\r",
+									"        }\r",
+									"    }\r",
+									"\r",
+									"    console.clear();\r",
+									"    asyncSendRequest(createUserOwnerRequest, createCompanyRequest, updateUserOwnerRequest);\r",
+									"\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"let genName = \"Лунатиков Олег Михайлович\";\r",
+									"let genEmail = \"gendir@romashka.com\";\r",
+									"let genPhone = \"8-906-1112233\";\r",
+									"let genBirthday = \"08.09.1985\";\r",
+									"\r",
+									"let responseFindName = jsonData?.results.find(element => element.name === genName)?.name;\r",
+									"let responseFindEmail = jsonData?.results.find(element => element.email === genEmail)?.email;\r",
+									"let responseFindPhone = jsonData?.results.find(element => element.phone === genPhone)?.phone;\r",
+									"let responseFindBirthday = jsonData?.results.find(element => element.birthday === genBirthday)?.birthday;\r",
+									"\r",
+									"pm.test(`Генеральный директор найден по фамилии (код ${pm.response.code})`, function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([231,232,235]);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Имя генерального директора ${genName} соответствует возвращенному`, function () {\r",
+									"        pm.expect(responseFindName).to.eql(genName);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Email генерального директора ${genEmail} соответствует возвращенному`, function () {\r",
+									"        pm.expect(responseFindEmail).to.eql(genEmail);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Телефон генерального директора ${genPhone} соответствует возвращенному`, function () {\r",
+									"        pm.expect(responseFindPhone).to.eql(genPhone);\r",
+									"});\r",
+									"\r",
+									"pm.test(`День рождения генерального директора ${genBirthday} соответствует возвращенному`, function () {\r",
+									"        pm.expect(responseFindBirthday).to.eql(genBirthday);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\":\"Лунатиков Олег Михайлович\",\r\n\"fullSimilarity\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/magicsearch",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"magicsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 35-1 USER addAvatar Добавить аватар из файла пользователю",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(test(7,2));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "gendir@romashka.ru",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"value": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/addavatar",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"addavatar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"Object.prototype.test = (a, b) => a+b; // эта функция будет видна во всей коллекции"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "usrEmail34",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "compId34",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "magicSearchEnvURL",
+			"value": "http://users.bugred.ru",
+			"type": "string"
+		}
+	]
+}

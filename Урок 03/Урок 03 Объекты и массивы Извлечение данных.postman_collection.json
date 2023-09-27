@@ -1,0 +1,483 @@
+{
+	"info": {
+		"_postman_id": "162b2df4-8d10-4dc8-add5-f028280783bb",
+		"name": "Урок 03 Объекты и массивы Извлечение данных",
+		"description": "## **Коллекция ДЗ Урок 3.** Объекты и массивы. Извлечение данных\n\n#### Задание 5.\n\nОтветьте на следующие вопросы:\n\n_**1\\. Это массив?**_\n\n``` javascript\n[1, 2, 3]\n\n ```\n\n_**2\\. Что является массивом (выберите один или несколько ответов)?**_\n\n``` javascript\na. {1, 2, 3}\nb. [\"Молли\", {a: 5, b:8}, 99]\nc. var num = [1]\nd. []\ne. name = [\"Анна\", 66]\nf. {a: [2, 5, 8], names: [\"Ваня\", \"Антон\", \"Чебурашка\"]}\ng. [\"Ольга\", \"Михаил\", \"Ольга\"]\n\n ```\n\n_**3\\. Что является объектом (выберите один или несколько ответов)?**_\n\n``` javascript\na. sugg = \n      {      \n         query: \"Виктор Иван\",          \n         count: 7\n      };\nb. {\n     name = \"Oleg\",\n     year = 99\n   }\nc. {\n     \"items\": [\n               \"Why WonderWidgets are great\",\n               \"Who buys WonderWidgets\"]\n    }\nd. {1, 2}\ne. {a:1, b:2}\nf. sugg = { \"query\": \"Виктор Иван\", \"count\": 7 };\n\n ```\n\n_**4\\. Как достать элемент \"Олечка\" из массива names = \\[\"Олечка\", \"Молечка\", \"Колечка\"\\] (выберите один ответ)?**_\n\n``` javascript\na. names[0]\nb. names[\"Олечка\"]\nc. names[1]\n\n ```\n\n_**5\\. Как достать значение name из объекта spider?**_\n\n``` javascript\nlet spider= \n      {      \n        name: \"Человек-Паук: Вдали от дома\",\n        year: 2019,\n        actors: [\"Том Холланд\", \"Зендея\", \"Энгаури Райс\", \"Джон Фавро\", \"Джейк Джилленхол\", \"Сэмюэл Л. Джексон\"]        \n};\n\n ```\n\n_**Выберите один или несколько ответов.**_\n\n``` javascript\na. spider['name']\nb. spider[\"name']\nc. spider[0]\nd. spider[\"name\"]\ne. spider.name\nf. spider[name]\ng. spider{'name'}\nh. spider.year\n\n ```\n\n_**6\\. Получите значение \"Зендея\":**_\n\n``` javascript\nlet spider= \n      {      \n         name: \"Человек-Паук: Вдали от дома\",\n         year: 2019,\n         actors: [\"Том Холланд\", \"Зендея\", \"Энгаури Райс\", \"Джон Фавро\", \"Джейк Джилленхол\", \"Сэмюэл Л. Джексон\"]         \n};\n\n ```\n\n**7\\. Получите имя ее актрисы Гвинет Пэлтроу):**\n\n``` javascript\nlet marvel = [\n     {\n      name: \"Человек-Паук: Вдали от дома\",\n      year: 2019,\n      actors: [\"Том Холланд\", \"Зендея\", \"Энгаури Райс\", \"Джон Фавро\", \"Джейк Джилленхол\", \"Сэмюэл Л. Джексон\"]      \n     },\n     {     \n      name: \"Мстители: Финал\",\n      year: 2019,\n      actors:[\"Роберт Дауни мл.\", \"Крис Эванс\", \"Марк Руффало\", \"Крис Хемсворт\",\"Скарлетт Йоханссон\", \"Джереми Реннер\", \"Дон Чидл\", \"Пол Радд\", \"БриЛарсон\", \"Карен Гиллан\"]      \n     },\n     {     \n      name: \"Железный человек\",\n      year: 2008,\n     actors: [\"Роберт Дауни мл.\", \"Джефф Бриджес\", \"Гвинет Пэлтроу\", \"Терренс Ховард\"]\n     }     \n]\n\n ```\n\n_**8\\. Значение year для Kitty как достать? Используйте один вариант обращения**__**к объекту в ответе (не стесняйтесь проверять себя в консоли браузера, а**__**в блокноте можно красиво переписать эту же запись!)**_\n\n``` javascript\nlet mixData = [10, \"Pussy\", [\"мяу\", \"мур\", \"РррР\", \"ШшшШшш\", {name:\n\"Lucky\", year: 3, family: [\"mama\", {name: \"Kitty\", year: 3}, \"papa\"]}]];\n\n ```\n\n##### Запрос задания:\n\n- **GET ДЗ 5 Ответы на тест**\n    \n\n#### Задание 6.\n\n**DADATA**, поиск фамилии. Для ресурса DADATA сформируйте следующее тело запроса:\n\n``` json\n{\n    \"query\": \"Андрей Мал\"\n}\n\n ```\n\nНайдите в ответах фамилию \"Малахов\" (именно фамилию). Выведите в консоль.\n\n##### Запрос задания:\n\n- **POST ДЗ 6 DADATA Поиск по фамилии**\n    \n\n#### Задание 7.\n\n**USERS**, метод _**getUserFull**_. Создайте пользователя, связанного с двумя или более компаниями (либо создайте компанию и укажите в качестве ее владельца выбранного пользователя). Отправьте запрос, получите из ответа название второй компании пользователя и выведите ее в консоль.\n\n##### Запрос задания:\n\n- **POST ДЗ 7 USER getUserFull Получение названия второй компании пользователя**\n    \n\n#### Задание 8.\n\n**REQRES**, метод _**listUser**_. Получить количество пользователей в ответе сервера и, если среди них есть пользователь с именем _Charles_, вывести это имя в консоль.\n\n##### Запрос задания:\n\n- **GET ДЗ 8 REQRES listUser Получить количество пользователей с указанным именем**\n    \n\n#### Задание 9.\n\n**JIRA**, метод _**getIssue**_. Для задачи TV-4 вывести следующие поля:\n\n1. Количество _**watchers**_\n2. Статус связи (\"блокирует\")\n3. _**colorName**_ из _**statusCategory**_ связанной задачи\n4. флаг, является ли связанная задача сабтаском\n5. Имя автора аттача\n6. _**summary**_ сабтаска\n7. _**id**_ из _**statusCategory**_ сабтаска\n8. приоритет (\"Medium\") сабтаска\n9. _**timeZone**_ оставившего первый комментарий\n10. Значение самого комментария\n    \n\n##### Запрос задания:\n\n- **GET ДЗ 9 JIRA getIssue Вывести в консоль указанные поля**\n    \n\n##### Примечание:\n\n1. Запросы к ресурсу **DADATA** требуют авторизации. Параметры авторизации хранятся и заполняются в глобальных переменных **DADATA_AUTH_KEY** и **DADATA_AUTH_VALUE**, метод авторизации в запросах - **API Key**.\n2. Запрос **ДЗ 7 USER getUserFull Получение названия второй компании пользователя** требует предварительного запуска коллекции **Подготовка данных для запросов к ресурсу USERS** и запроса из папки **Подготовка данных для Задания 7** текущей коллекции.\n3. Запросы к ресурсу **JIRA** требуют авторизации. Параметры авторизации хранятся и заполняются в глобальных переменных _**ATL_USERNAME**_ и _**ALT_PSW**_, метод авторизации в запросах - **Basic Auth**.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23386398",
+		"_collection_link": "https://lively-capsule-55441.postman.co/workspace/%25D0%2590%25D0%25B2%25D1%2582%25D0%25BE%25D0%25BC%25D0%25B0%25D1%2582%25D0%25B8%25D0%25B7%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D1%2582%25D0%25B5%25D1%2581%25D1%2582%25D0%25BE%25D0%25B2-%25D0%25B4%25D0%25BB%25D1%258F-REST-A~f0af8592-a4dc-4fe3-aed5-135832153c62/collection/23386398-162b2df4-8d10-4dc8-add5-f028280783bb?action=share&source=collection_link&creator=23386398"
+	},
+	"item": [
+		{
+			"name": "ДЗ",
+			"item": [
+				{
+					"name": "Подготовка данных для Задания 7",
+					"item": [
+						{
+							"name": "CreateCompany For Owner User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"company_name\": \"Дополнительная компания №{{$randomInt}}\",\r\n  \"company_type\": \"ОАО\",\r\n  \"company_users\": [\"sidorov@gmail.com\"],\r\n  \"email_owner\": \"sidorov@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{USERS_URL}}/createcompany",
+									"host": [
+										"{{USERS_URL}}"
+									],
+									"path": [
+										"createcompany"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "2. Создали компанию НКВД с одним сотрудником - он же ее владелец",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"company_name\": \"НКВД\",\r\n  \"company_type\": \"ОАО\",\r\n  \"company_users\": [\"beria@nkvd.com\"],\r\n  \"email_owner\": \"beria@nkvd.com\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://users.bugred.ru/tasks/rest/createcompany",
+											"protocol": "http",
+											"host": [
+												"users",
+												"bugred",
+												"ru"
+											],
+											"path": [
+												"tasks",
+												"rest",
+												"createcompany"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": null,
+									"cookie": [],
+									"body": null
+								},
+								{
+									"name": "2а. Создали компанию с именем похожим на НКВД",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"company_name\": \"НКВД МГБ\",\r\n  \"company_type\": \"ОАО\",\r\n  \"company_users\": [\"beria@nkvd.com\"],\r\n  \"email_owner\": \"beria@nkvd.com\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://users.bugred.ru/tasks/rest/createcompany",
+											"protocol": "http",
+											"host": [
+												"users",
+												"bugred",
+												"ru"
+											],
+											"path": [
+												"tasks",
+												"rest",
+												"createcompany"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "ДЗ 5 Ответы на тест",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const mixData = [10, \"Pussy\", [\"мяу\", \"мур\", \"РррР\", \"ШшшШшш\", {name: \"Lucky\", year: 3, family: [\"mama\", {name: \"Kitty\", year: 3}, \"papa\"]}]];\r",
+									"\r",
+									"console.clear();\r",
+									"console.log(\"1. [1, 2, 3] - это массив\");\r",
+									"\r",
+									"console.log(\"2. a) {1, 2, 3} - это не массив, это неправильная запись объекта: нет ключа, только значения\");\r",
+									"console.log(\"   b) ['Молли', {a: 5, b:8}, 99] - это массив\");\r",
+									"console.log(\"   c) [1] - это массив\");\r",
+									"console.log(\"   d) [] - это массив\");\r",
+									"console.log(\"   e) ['Анна', 66] - это массив\");\r",
+									"console.log(\"   f) {a: [2, 5, 8], names: ['Ваня', 'Антон', 'Чебурашка']} - это не массив, это объект, состоящий из 2-х массивов\");\r",
+									"console.log(\"   g) ['Ольга', 'Михаил', 'Ольга'] - это массив\");\r",
+									"\r",
+									"console.log(\"3. a) { query: 'Виктор Иван', count: 7 } - это объект\");\r",
+									"console.log(\"   b) {name = 'Oleg', year = 99} - это не объект, запись с ошибкой: вместо '=' должны быть ':'\");\r",
+									"console.log(\"   c) {'items': ['Why <em>WonderWidgets</em> are great', 'Who <em>buys</em> WonderWidgets']} - это объект, значение ключа в котором - массив\");\r",
+									"console.log(\"   d) {1, 2} - это не объект, запись с ошибкой: нет ключа, только значения\");\r",
+									"console.log(\"   e) {a:1, b:2} - это объект\");\r",
+									"console.log(\"   f) {'query': 'Виктор Иван', 'count': 7 } - это объект\");\r",
+									"console.log(\"4. Правильный вариант a) - names[0]\");\r",
+									"console.log(\"5. a) spider['name'] - верно\");\r",
+									"console.log(\"   b) spider[''name'] - не верно\");\r",
+									"console.log(\"   c) spider[0] - не верно, массив spider[] не опрелелен, поэтому ответ undefined\");\r",
+									"console.log(\"   d) spider[''name''] - верно\");\r",
+									"console.log(\"   e) spider.name - верно\");\r",
+									"console.log(\"   f) spider[name] - не верно, массив spider[] не опрелелен, переменная-индекс name не объявлена, поэтому ReferenceError: name is not defined\");\r",
+									"console.log(\"   g) spider{'name'} - не верно, синтаксическая ошибка\");\r",
+									"console.log(\"   h) spider.year - не верно, выводит год картины, а не ее название\");\r",
+									"console.log(\"6. spider.actors[1]\");\r",
+									"console.log(\"7. marvel[2].actors[2]\");\r",
+									"console.log(\"8. mixData[2][4].family[1].year\");\r",
+									"\r",
+									"\r",
+									"console.log(mixData[2][4].family[1].year);\r",
+									"console.log(typeof(mixData));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "postman-echo.com/get",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 6 DADATA  Поиск по фамилии Авторизация в Authorization",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"const SearchName = 'Малахов';\r",
+									"\r",
+									"console.clear();\r",
+									"\r",
+									"for (let suggestion of jsonData.suggestions) {\r",
+									"if (suggestion.data.surname === SearchName) console.log('Искомая фамилия найдена: ' + suggestion.data.surname);\r",
+									"};\r",
+									"\r",
+									"// варианты\r",
+									"let targetArr = jsonData.suggestions.filter(el => el.data.surname === SearchName);\r",
+									"console.log(targetArr);\r",
+									"\r",
+									"jsonData.suggestions.forEach(el => el.data.surname === SearchName ? console.log(`Фамилия ${el.data.surname} найдена`) : null);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{DADATA_AUTH_VALUE}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{DADATA_AUTH_KEY}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\": \"Андрей Мал\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DADATA_URL}}/fio",
+							"host": [
+								"{{DADATA_URL}}"
+							],
+							"path": [
+								"fio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 6 DADATA  Поиск по фамилии Авторизация в Headers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"const SearchName = 'Малахов';\r",
+									"\r",
+									"console.clear();\r",
+									"for (let suggestion of jsonData.suggestions) {\r",
+									"if (suggestion.data.surname === SearchName) console.log('Искомая фамилия найдена: ' + suggestion.data.surname);\r",
+									"};"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{DADATA_AUTH_VALUE}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"query\": \"Андрей Мал\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DADATA_URL}}/fio",
+							"host": [
+								"{{DADATA_URL}}"
+							],
+							"path": [
+								"fio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 7 USER getUserFull Получение названия второй компании пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"const companyCount = jsonData.companys.length;\r",
+									"console.clear();\r",
+									"console.log('Название дополнительной компании: ' + jsonData.companys[companyCount-(companyCount-1)]?.name);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"sidorov@gmail.com\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{USERS_URL}}/getuserfull",
+							"host": [
+								"{{USERS_URL}}"
+							],
+							"path": [
+								"getuserfull"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 8 REQRES listUser Получить количество пользователей с указанным именем",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"const searchName = 'Charles';\r",
+									"\r",
+									"console.clear();\r",
+									"console.log('количество пользователей (переменная total): ' + jsonData.total);\r",
+									"for (let searchData of jsonData.data) {\r",
+									"if (searchData.first_name === searchName) console.log('Искомое имя: ' + searchData.first_name);\r",
+									"};\r",
+									"console.log(JSON.stringify(pm.request.toJSON(), null, 2));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users?page=1",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 9 JIRA getIssue Вывести в консоль указанные поля",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"console.clear();\r",
+									"console.log('1. watchCount = ' + jsonData.fields.watches.watchCount);\r",
+									"console.log('2. Связанная задача - статус связи: ' + jsonData.fields.issuelinks[0].type.name);\r",
+									"console.log('3. Связанная задача - statusCategory - colorName: ' + jsonData.fields.issuelinks[0].outwardIssue.fields.status.statusCategory.colorName);\r",
+									"console.log('4. Связанная задача - подзадача? : ' + jsonData.fields.issuelinks[0].outwardIssue.fields.issuetype.subtask);\r",
+									"for (let i = 0; i < jsonData.fields.attachment.length; i++){\r",
+									"    console.log('5.'+ (i+1) + ' Автор аттача №' + (i+1) +': ' + jsonData.fields.attachment[i].author.displayName);\r",
+									"};\r",
+									"console.log('6. Связанная задача - summary: ' + jsonData.fields.issuelinks[0].outwardIssue.fields.summary);\r",
+									"console.log('7. Связанная задача - statusCategory - id: ' + jsonData.fields.status.statusCategory.id);\r",
+									"console.log('8. Связанная задача - приоритет: ' + jsonData.fields.priority.name);\r",
+									"console.log('9. timeZone автора первого комментария: ' + jsonData.fields.comment.comments[0].author.timeZone);\r",
+									"console.log('10. Содержимое первого комментария: ' + jsonData.fields.comment.comments[0].body.content[0].content[0].text);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{ALT_PSW}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{ATL_USERNAME}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{JIRA_URL}}/issue/:issueIdOrKey",
+							"host": [
+								"{{JIRA_URL}}"
+							],
+							"path": [
+								"issue",
+								":issueIdOrKey"
+							],
+							"variable": [
+								{
+									"key": "issueIdOrKey",
+									"value": "TV-4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

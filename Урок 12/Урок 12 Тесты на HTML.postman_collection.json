@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "8177c013-4712-4e85-b3ec-64af528e5502",
+		"name": "Урок 12 Тесты на HTML",
+		"description": "## **Коллекция ДЗ Урок 12.** Тесты на HTML\n\n#### Задание 53.\n\n**USERS**. Обратиться к ресурсу по ссылке: [http://users.bugred.ru](http://users.bugred.ru.)\n\nВ полученном ответе проверяем наличие ссылки \"О проекте\", а также проверяем ее доступность.\n\n##### Запрос задания:\n\n- **GET ДЗ 53 User HTML Получение атрибута и проверка ссылки**\n    \n\n#### Задание 54.\n\nОбратиться к ресурсу по ссылке: [https://software-testing.ru](https://software-testing.ru)\n\nВ полученном ответе для всех блоков \"_**Тренинги**_\" из раздела \"**О тренингах**\" проверить:\n\n- Общую **структуру** блоков \"_**Тренинги**_\"\n- **Ссылка** на тренинг открывается в _**новом окне**_\n- По **ссылке** на тренинг не передается _**индекс цитирования**_\n- **Заголовок ссылки** на трениг содержит текст \"_**Начало:**_\" и дату тренинга в формате \"**ДД МЕСЯЦ ГГГГ**\"\n- Текст блока с классом _**.slick-rss-item-desc**_ идентичен тексту в атрибуте _**title**_ ссылки\n    \n\n##### Запрос задания:\n\n- **GET ДЗ 54 Software-testing HTML Проверка отображения тренингов**\n    \n\n##### Примечание:\n\n1. Для работы с ответом от сервера в формате **HTML** использовалась библиотека _**cheerio**_",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23386398",
+		"_collection_link": "https://lively-capsule-55441.postman.co/workspace/%25D0%2590%25D0%25B2%25D1%2582%25D0%25BE%25D0%25BC%25D0%25B0%25D1%2582%25D0%25B8%25D0%25B7%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F-%25D1%2582%25D0%25B5%25D1%2581%25D1%2582%25D0%25BE%25D0%25B2-%25D0%25B4%25D0%25BB%25D1%258F-REST-A~f0af8592-a4dc-4fe3-aed5-135832153c62/collection/23386398-8177c013-4712-4e85-b3ec-64af528e5502?action=share&source=collection_link&creator=23386398"
+	},
+	"item": [
+		{
+			"name": "ДЗ",
+			"item": [
+				{
+					"name": "ДЗ 53 User HTML Получение атрибута и проверка ссылки",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let $ = cheerio.load(pm.response.text()); // получили с помощью cheerio по URL html как текст\r",
+									"\r",
+									"let checkedURL = $(\"a[href='https://okiseleva.blogspot.com/2017/04/users-soap-rest.html']\").attr('href'); // пытаемся найти нужную ссылку\r",
+									"let aboutURL =  $(\"a:contains('О проекте')\").attr('href'); // вариант 2: ищем нужную ссылку по содержимому (тексту)\r",
+									"console.clear();\r",
+									"console.log(`About: ${aboutURL}`);\r",
+									"\r",
+									"pm.sendRequest(checkedURL, function (err, res) { // пытаемся выполнить по этой ссылке запрос\r",
+									"    pm.test(`Ссылка \"О проекте\" доступна [Статус-код 200]`, function () {\r",
+									"        pm.expect(res).to.have.status(200);\r",
+									"    });\r",
+									"\r",
+									"    console.log(err ? err : res);  \r",
+									"});\r",
+									"\r",
+									"pm.sendRequest(aboutURL, function (err, res) { // пытаемся выполнить по этой ссылке запрос\r",
+									"    pm.test(`Ссылка \"О проекте\" доступна [Статус-код 200] (вариант №2, по тексту ссылки)`, function () {\r",
+									"        pm.expect(res).to.have.status(200);\r",
+									"    });\r",
+									"\r",
+									"    console.log(err ? err : res);  \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://users.bugred.ru/",
+							"protocol": "http",
+							"host": [
+								"users",
+								"bugred",
+								"ru"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ДЗ 54 Software-testing HTML Проверка отображения тренингов",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let $ = cheerio.load(pm.response.text(), {\r",
+									"    xmlMode: true\r",
+									"});\r",
+									"\r",
+									"console.clear();\r",
+									"\r",
+									"console.log($('a.slickTip + div.slick-rss-item-desc', 'li.slick-rss-item').text());\r",
+									"\r",
+									"// получаем тот же <div>, но выбираем уже предыдущий ему элемент (<a>) и смотрим уже его html-представление .html()\r",
+									"console.log($('a.slickTip + div.slick-rss-item-desc', 'li.slick-rss-item').prev().html({decodeEntities: false}));\r",
+									"\r",
+									"console.log($('a.slickTip + div.slick-rss-item-desc', 'li.slick-rss-item').attr()); //просмотр атрибутов\r",
+									"\r",
+									"console.log($('a.slickTip + div.slick-rss-item-desc', 'li.slick-rss-item').prev().attr());\r",
+									"\r",
+									"//получаем самые нижние элементы проверяемых блоков html (div'ы), подробно:\r",
+									"// выбираем соседний (+) элемент элемента <a> класса slickTip, причем этот соседний элемент должен быть <div> и иметь класс slick-rss-item-desc, при этом и элемент <a>, и элемент <div> должны находиться внутри элемента li класса slick-rss-item (.html({decodeEntities: false}) ломал вывод, возможно конфликт с cheerio.load(pm.response.text(), {xmlMode: true})), но xmlMode нужен !!!\r",
+									"let verifiableHTMLStuckture = $('a.slickTip + div.slick-rss-item-desc', 'li.slick-rss-item');//.html({decodeEntities: false});\r",
+									"\r",
+									"//Начинаем проверять по очереди все блоки с информацией о тренингах \r",
+									"let txtOfDiv = ''; // для текста div'а класса .slick-rss-item-desc\r",
+									"for (let key = 0; key < verifiableHTMLStuckture.length; key++) {\r",
+									"    pm.test(`Корневой элемент блока №${key+1} имеет тег ${verifiableHTMLStuckture[key].parent.name} и класс ${verifiableHTMLStuckture[key].parent.attribs.class}`, function () {\r",
+									"        pm.expect(verifiableHTMLStuckture[key].parent.name, 'Тег корневого элемента').to.eqls('li');\r",
+									"        pm.expect(verifiableHTMLStuckture[key].parent.attribs.class, 'Класс корневого элемента').to.eqls('slick-rss-item');\r",
+									"    });\r",
+									"    pm.test(`Первый дочерний элемент блока №${key+1} имеет тег ${verifiableHTMLStuckture[key].prev.name} и класс ${verifiableHTMLStuckture[key].prev.attribs.class}`, function () {\r",
+									"        pm.expect(verifiableHTMLStuckture[key].prev.name, 'Тег 1-го дочернего элемента').to.eqls('a');\r",
+									"        pm.expect(verifiableHTMLStuckture[key].prev.attribs.class, 'Класс 1-го дочернего элемента').to.eqls('slickTip');\r",
+									"    });\r",
+									"    pm.test(`Ссылка на тренинг в блоке №${key+1} начинается на https://software-testing.ru/edu/3-online/...`, function () {\r",
+									"        pm.expect(verifiableHTMLStuckture[key].prev.attribs.href).to.match(/^https:\\/\\/software-testing.ru\\/edu\\/3-online\\//);\r",
+									"    });\r",
+									"    pm.test(`Ссылка на тренинг в блоке №${key+1} открывается в новом окне`, function () {\r",
+									"        pm.expect(verifiableHTMLStuckture[key].prev.attribs.target).to.eqls('_blank');\r",
+									"    });\r",
+									"    pm.test(`По ссылке на тренинг в блоке №${key+1} не передается индекс цитирования`, function () {\r",
+									"        pm.expect(verifiableHTMLStuckture[key].prev.attribs.rel).to.eqls('nofollow');\r",
+									"    });\r",
+									"    pm.test(`Заголовок ссылки на тренинг в блоке №${key+1} содержит текст \"Начало:\" и дату тренинга в формате \"ДД МЕСЯЦ ГГГГ\" (${verifiableHTMLStuckture[key].prev.attribs.title})`, function () {\r",
+									"        pm.expect(verifiableHTMLStuckture[key].prev.attribs.title).to.match(/^(Начало:)\\s([1-9]|[12][0-9]|3[0-1])\\s([а-яё]{3,8})\\s(1[9]|2[01])([0-9][0-9])/);\r",
+									"    });\r",
+									"    pm.test(`Второй дочерний элемент блока №${key+1} имеет тег ${verifiableHTMLStuckture[key].name} и класс ${verifiableHTMLStuckture[key].attribs.class}`, function () {\r",
+									"        pm.expect(verifiableHTMLStuckture[key].name, 'Тег 2-го дочернего элемента').to.eqls('div');\r",
+									"        pm.expect(verifiableHTMLStuckture[key].attribs.class, 'Класс 2-го дочернего элемента').to.eqls('slick-rss-item-desc');\r",
+									"    });\r",
+									"    // verifiableHTMLStuckture[key].children - массив, Object.values(element) - тоже массив типа [\"Начало: 17 апреля 2023\", \"text\", ...] поэтому в нем ищем элемент со значением \"text\" и получаем объект типа {data: \"Начало: 20 апреля 2023\", type: \"text\", next: null…} из которого и забираем значение ключа data\r",
+									"    txtOfDiv = verifiableHTMLStuckture[key].children.find(element => Object.values(element).find(el => el === \"text\")).data;\r",
+									"    console.log(verifiableHTMLStuckture[key].children.find(element => Object.values(element).find(el => el === \"text\")).data);\r",
+									"    pm.test(`Текст второго дочернего элемента класса .slick-rss-item-desc в блоке №${key+1} идентичен тексту в атрибуте title (в заголовке) ссылки того же блока`, function () {\r",
+									"        pm.expect(txtOfDiv).to.eqls(verifiableHTMLStuckture[key].prev.attribs.title);\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://software-testing.ru/",
+							"protocol": "https",
+							"host": [
+								"software-testing",
+								"ru"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
